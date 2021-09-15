@@ -1,0 +1,6 @@
+{
+	"appId": "io.ionic.starter",
+	"appName": "palace",
+	"webDir": "www",
+	"bundledWebRuntime": false
+}
