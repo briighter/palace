@@ -9,13 +9,15 @@ import { GamePageRoutingModule } from './game-routing.module';
 import { GamePage } from './game.page';
 import { NumbersComponent } from './numbers/numbers.component';
 import { LettersComponent } from './letters/letters.component';
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    GamePageRoutingModule
+    GamePageRoutingModule,
+    SharedModule
   ],
   declarations: [GamePage, NumbersComponent, LettersComponent]
 })
