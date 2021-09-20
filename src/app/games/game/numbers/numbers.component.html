@@ -1,10 +1,10 @@
 <ion-icon name="arrow-back-outline" class="back-arrow" routerLink="/games"></ion-icon>
 
 <ion-content>
-  <div id="top-container">
-    <app-game-intro></app-game-intro>
+  <div *ngIf="!playing" id="top-container">
+    <app-game-intro (beginPlayEvent)="beginPlay($event)"></app-game-intro>
   </div>
-  <div id="container">
+  <div *ngIf="playing" id="container">
     <p>
       numbers works!
     </p>
