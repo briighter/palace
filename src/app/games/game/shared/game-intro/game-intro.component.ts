@@ -6,6 +6,7 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 })
 export class GameIntroComponent implements OnInit {
   @Output() beginPlayEvent = new EventEmitter<boolean>();
+  @Output() changeSettingsEvent = new EventEmitter<boolean>();
 
   constructor() { }
 
@@ -17,6 +18,10 @@ export class GameIntroComponent implements OnInit {
 
   beginPlay() {
     this.beginPlayEvent.emit(true);
+  }
+
+  changeSettings() {
+    this.changeSettingsEvent.emit(true);
   }
 
   resetGameState() {
