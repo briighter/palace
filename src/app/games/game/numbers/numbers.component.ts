@@ -7,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NumbersComponent implements OnInit {
   playing = false; //Refactor to game state enum
+  numbers = '1234';
+  isDisplayed = true;
 
   constructor() { }
 
@@ -15,5 +17,9 @@ export class NumbersComponent implements OnInit {
 
   beginPlay(playState: boolean) {
     this.playing = playState;
+  }
+
+  hideNumbers() {
+    this.isDisplayed = false;
   }
 }

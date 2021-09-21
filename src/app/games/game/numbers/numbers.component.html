@@ -5,8 +5,6 @@
     <app-game-intro (beginPlayEvent)="beginPlay($event)"></app-game-intro>
   </div>
   <div *ngIf="playing" id="container">
-    <p>
-      numbers works!
-    </p>
+    <h1 *ngIf="isDisplayed">{{ numbers }}</h1>
   </div>
 </ion-content>
