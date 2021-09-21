@@ -15,11 +15,22 @@ export class NumbersComponent implements OnInit {
   ngOnInit() {
   }
 
+  // ionViewDidEnter() {
+  //   this.hideNumbers();
+  // }
+
   beginPlay(playState: boolean) {
+    this.isDisplayed = true;
+    console.log(this.isDisplayed);
+
     this.playing = playState;
+    this.hideNumbers();
   }
 
   hideNumbers() {
-    this.isDisplayed = false;
+    setTimeout(function() {
+      this.isDisplayed = false;
+      console.log(this.isDisplayed);
+    }.bind(this), 3000);
   }
 }
