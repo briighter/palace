@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-game-answer',
@@ -6,9 +7,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./game-answer.component.scss'],
 })
 export class GameAnswerComponent implements OnInit {
-
+  userAnswerControl = new FormControl('');
   constructor() { }
 
   ngOnInit() {}
+
+  submit() {
+
+  }
 
 }
