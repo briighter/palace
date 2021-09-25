@@ -7,4 +7,10 @@
   <div *ngIf="playing" id="container">
     <h1 *ngIf="isDisplayed">{{ numbers }}</h1>
   </div>
+  <div *ngIf="showGetAnswer" id="bottom-container">
+    <ion-item>
+      <ion-label position="stacked">Type what you remember</ion-label>
+      <ion-input type="text"></ion-input>
+    </ion-item>
+  </div>
 </ion-content>

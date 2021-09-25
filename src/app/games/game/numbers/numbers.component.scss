@@ -34,6 +34,18 @@
     text-decoration: none;
 }
 
+#bottom-container {
+    margin: auto;
+    width: 66%;
+    top: 33%;
+    position: relative;
+    transform: translateY(-50%);
+}
+
+#bottom-container > ion-item {
+    border-radius: 25px;
+}
+
 .back-arrow {
     width: 3em;
     height: 3em;

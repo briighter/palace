@@ -8,16 +8,17 @@ import { Component, OnInit } from '@angular/core';
 export class NumbersComponent implements OnInit {
   playing = false; //Refactor to game state enum
   numbers = '1234';
-  isDisplayed = true;
+  isDisplayed = false;
+  showGetAnswer = false;
 
   constructor() { }
 
   ngOnInit() {
   }
 
-  // ionViewDidEnter() {
-  //   this.hideNumbers();
-  // }
+  ionViewDidLeave() {
+    this.isDisplayed = false;
+  }
 
   beginPlay(playState: boolean) {
     this.isDisplayed = true;
@@ -31,6 +32,14 @@ export class NumbersComponent implements OnInit {
     setTimeout(function() {
       this.isDisplayed = false;
       console.log(this.isDisplayed);
-    }.bind(this), 3000);
+    }.bind(this), 1000);
+
+    setTimeout(() => {
+      this.getAnswer();
+    }, 1200);
+  }
+
+  getAnswer() {
+    this.showGetAnswer = true;
   }
 }
