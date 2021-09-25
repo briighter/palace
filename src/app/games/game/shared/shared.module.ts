@@ -4,17 +4,19 @@ import { IonicModule } from '@ionic/angular';
 
 import { GameIntroComponent } from './game-intro/game-intro.component';
 import { SettingsComponent } from './settings/settings.component';
+import { GameAnswerComponent } from './game-answer/game-answer.component';
 
 
 
 @NgModule({
-  declarations: [GameIntroComponent, SettingsComponent],
+  declarations: [GameIntroComponent, GameAnswerComponent, SettingsComponent],
   imports: [
     CommonModule,
     IonicModule
   ],
   exports: [
     GameIntroComponent,
+    GameAnswerComponent,
     SettingsComponent
   ]
 })
