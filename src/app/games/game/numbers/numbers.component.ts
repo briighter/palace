@@ -9,7 +9,8 @@ export class NumbersComponent implements OnInit {
   playing = false; //Refactor to game state enum
   numbers = '1234';
   isDisplayed = false;
-  showGetAnswer = false;
+  inputIsDisplayed = false;
+  answers = []; // Refactor to database
 
   constructor() { }
 
@@ -22,8 +23,6 @@ export class NumbersComponent implements OnInit {
 
   beginPlay(playState: boolean) {
     this.isDisplayed = true;
-    console.log(this.isDisplayed);
-
     this.playing = playState;
     this.hideNumbers();
   }
@@ -31,15 +30,19 @@ export class NumbersComponent implements OnInit {
   hideNumbers() {
     setTimeout(function() {
       this.isDisplayed = false;
-      console.log(this.isDisplayed);
     }.bind(this), 1000);
 
     setTimeout(() => {
-      this.getAnswer();
-    }, 1200);
+      this.showGetAnswer();
+    }, 1100);
   }
 
-  getAnswer() {
-    this.showGetAnswer = true;
+  showGetAnswer() {
+    this.inputIsDisplayed = true;
+  }
+
+  submitUserAnswer(ans: string) {
+    this.answers.push(ans);
+    this.inputIsDisplayed = false;
   }
 }

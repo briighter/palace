@@ -7,7 +7,7 @@
   <div *ngIf="playing" id="container">
     <h1 *ngIf="isDisplayed">{{ numbers }}</h1>
   </div>
-  <div *ngIf="showGetAnswer" id="bottom-container">
-    <app-game-answer></app-game-answer>
+  <div *ngIf="inputIsDisplayed" id="bottom-container">
+    <app-game-answer (submitAnswerEvent)="submitUserAnswer($event)"></app-game-answer>
   </div>
 </ion-content>

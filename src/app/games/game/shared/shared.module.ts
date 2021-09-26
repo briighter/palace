@@ -5,6 +5,7 @@ import { IonicModule } from '@ionic/angular';
 import { GameIntroComponent } from './game-intro/game-intro.component';
 import { SettingsComponent } from './settings/settings.component';
 import { GameAnswerComponent } from './game-answer/game-answer.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -12,7 +13,8 @@ import { GameAnswerComponent } from './game-answer/game-answer.component';
   declarations: [GameIntroComponent, GameAnswerComponent, SettingsComponent],
   imports: [
     CommonModule,
-    IonicModule
+    IonicModule,
+    ReactiveFormsModule
   ],
   exports: [
     GameIntroComponent,

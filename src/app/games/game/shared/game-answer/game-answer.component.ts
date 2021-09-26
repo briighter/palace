@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormControl } from '@angular/forms';
 
 @Component({
@@ -7,14 +7,15 @@ import { FormControl } from '@angular/forms';
   styleUrls: ['./game-answer.component.scss'],
 })
 export class GameAnswerComponent implements OnInit {
+  @Output() submitAnswerEvent = new EventEmitter<string>();
   userAnswer = new FormControl('');
-  
+
   constructor() { }
 
   ngOnInit() {}
 
   submit() {
-    alert(this.userAnswer.value);
+    this.submitAnswerEvent.emit(this.userAnswer.value);
   }
 
 }
