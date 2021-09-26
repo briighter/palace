@@ -6,11 +6,12 @@ import { GameIntroComponent } from './game-intro/game-intro.component';
 import { SettingsComponent } from './settings/settings.component';
 import { GameAnswerComponent } from './game-answer/game-answer.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { GameResultComponent } from './game-result/game-result.component';
 
 
 
 @NgModule({
-  declarations: [GameIntroComponent, GameAnswerComponent, SettingsComponent],
+  declarations: [GameIntroComponent, GameAnswerComponent, GameResultComponent, SettingsComponent],
   imports: [
     CommonModule,
     IonicModule,
@@ -19,6 +20,7 @@ import { ReactiveFormsModule } from '@angular/forms';
   exports: [
     GameIntroComponent,
     GameAnswerComponent,
+    GameResultComponent,
     SettingsComponent
   ]
 })

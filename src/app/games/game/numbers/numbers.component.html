@@ -10,4 +10,7 @@
   <div *ngIf="inputIsDisplayed" id="bottom-container">
     <app-game-answer (submitAnswerEvent)="submitUserAnswer($event)"></app-game-answer>
   </div>
+  <div *ngIf="!playing" id="container">
+    <app-game-result></app-game-result>
+  </div>
 </ion-content>
