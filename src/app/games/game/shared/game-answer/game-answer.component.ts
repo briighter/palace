@@ -7,13 +7,14 @@ import { FormControl } from '@angular/forms';
   styleUrls: ['./game-answer.component.scss'],
 })
 export class GameAnswerComponent implements OnInit {
-  userAnswerControl = new FormControl('');
+  userAnswer = new FormControl('');
+  
   constructor() { }
 
   ngOnInit() {}
 
   submit() {
-
+    alert(this.userAnswer.value);
   }
 
 }
