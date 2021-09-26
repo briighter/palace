@@ -8,8 +8,9 @@ import { Component, OnInit } from '@angular/core';
 export class NumbersComponent implements OnInit {
   playing = false; //Refactor to game state enum
   numbers = '1234';
-  isDisplayed = false;
+  subjectIsDisplayed = false;
   inputIsDisplayed = false;
+  resultIsDisplayed = false;
   answers = []; // Refactor to database
 
   constructor() { }
@@ -18,18 +19,21 @@ export class NumbersComponent implements OnInit {
   }
 
   ionViewDidLeave() {
-    this.isDisplayed = false;
+    this.subjectIsDisplayed = false;
+    this.resultIsDisplayed = false;
+    this.inputIsDisplayed = false;
   }
 
   beginPlay(playState: boolean) {
-    this.isDisplayed = true;
+    this.subjectIsDisplayed = true;
+    this.resultIsDisplayed = false;
     this.playing = playState;
     this.hideNumbers();
   }
 
   hideNumbers() {
     setTimeout(function() {
-      this.isDisplayed = false;
+      this.subjectIsDisplayed = false;
     }.bind(this), 1000);
 
     setTimeout(() => {
@@ -44,5 +48,6 @@ export class NumbersComponent implements OnInit {
   submitUserAnswer(ans: string) {
     this.answers.push(ans);
     this.inputIsDisplayed = false;
+    this.resultIsDisplayed = true;
   }
 }

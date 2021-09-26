@@ -5,12 +5,12 @@
     <app-game-intro (beginPlayEvent)="beginPlay($event)"></app-game-intro>
   </div>
   <div *ngIf="playing" id="container">
-    <h1 *ngIf="isDisplayed">{{ numbers }}</h1>
+    <h1 *ngIf="subjectIsDisplayed">{{ numbers }}</h1>
   </div>
   <div *ngIf="inputIsDisplayed" id="bottom-container">
     <app-game-answer (submitAnswerEvent)="submitUserAnswer($event)"></app-game-answer>
   </div>
-  <div *ngIf="!playing" id="container">
-    <app-game-result></app-game-result>
+  <div *ngIf="resultIsDisplayed" id="container">
+    <app-game-result (beginPlayEvent)="beginPlay($event)"></app-game-result>
   </div>
 </ion-content>
