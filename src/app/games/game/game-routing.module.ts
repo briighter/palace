@@ -22,6 +22,10 @@ const routes: Routes = [
   {
     path: 'settings',
     component: SettingsComponent
+  },
+  {
+    path: 'games',
+    loadChildren: () => import('../../games/games.module').then( m => m.GamesPageModule)
   }
 ];
 
