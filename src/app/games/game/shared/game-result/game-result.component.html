@@ -1,5 +1,8 @@
-<p>
-  Conditional game result message!
-</p>
+<div *ngIf="gameResult === true">
+  <h1>Good thinking!</h1>
+</div>
+<div *ngIf="gameResult === false">
+  <h1>Not quite...</h1>
+</div>
 <ion-button (click)="beginPlay()">Again?</ion-button>
 <ion-button (click)="goToGames()">Games Menu</ion-button>

@@ -11,6 +11,6 @@
     <app-game-answer (submitAnswerEvent)="submitUserAnswer($event)"></app-game-answer>
   </div>
   <div *ngIf="resultIsDisplayed" id="container">
-    <app-game-result (beginPlayEvent)="beginPlay($event)"></app-game-result>
+    <app-game-result (beginPlayEvent)="beginPlay($event)" [gameResult]="gameResult"></app-game-result>
   </div>
 </ion-content>

@@ -1,5 +1,5 @@
 import { Route } from '@angular/compiler/src/core';
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
@@ -9,6 +9,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class GameResultComponent implements OnInit {
   @Output() beginPlayEvent = new EventEmitter<boolean>();
+  @Input() gameResult: boolean;
 
   constructor(private router: Router, private route: ActivatedRoute) { }
 

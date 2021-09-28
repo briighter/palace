@@ -7,7 +7,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NumbersComponent implements OnInit {
   playing = false; //Refactor to game state enum
-  numbers = '1234';
+  min = 0;
+  max = 9;
+  numbers = '';
   subjectIsDisplayed = false;
   inputIsDisplayed = false;
   resultIsDisplayed = false;
@@ -21,15 +23,25 @@ export class NumbersComponent implements OnInit {
 
   ionViewDidLeave() {
     this.subjectIsDisplayed = false;
-    this.resultIsDisplayed = false;
     this.inputIsDisplayed = false;
+    this.resultIsDisplayed = false;
   }
 
   beginPlay(playState: boolean) {
+    this.numbers = '';
+    this.generateNumbers(2);
     this.subjectIsDisplayed = true;
     this.resultIsDisplayed = false;
     this.playing = playState;
     this.hideNumbers();
+  }
+
+  generateNumbers(size: number) {
+    let num;
+    for(let i = 1; i <= size; i++) {
+      num = Math.floor(Math.random() * (this.max - this.min) + this.min);
+      this.numbers = this.numbers.concat(num);
+    }
   }
 
   hideNumbers() {
@@ -48,7 +60,7 @@ export class NumbersComponent implements OnInit {
 
   checkUserAnswer(ans: string) {
     if (this.numbers === ans) {
-      return true
+      return true;
     }
     return false;
   }
