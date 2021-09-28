@@ -12,6 +12,7 @@ export class NumbersComponent implements OnInit {
   inputIsDisplayed = false;
   resultIsDisplayed = false;
   answers = []; // Refactor to database
+  gameResult: boolean;
 
   constructor() { }
 
@@ -45,8 +46,16 @@ export class NumbersComponent implements OnInit {
     this.inputIsDisplayed = true;
   }
 
+  checkUserAnswer(ans: string) {
+    if (this.numbers === ans) {
+      return true
+    }
+    return false;
+  }
+
   submitUserAnswer(ans: string) {
     this.answers.push(ans);
+    this.gameResult = this.checkUserAnswer(ans);
     this.inputIsDisplayed = false;
     this.resultIsDisplayed = true;
   }
