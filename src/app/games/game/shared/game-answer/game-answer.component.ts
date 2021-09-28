@@ -1,5 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-game-answer',
@@ -17,5 +18,4 @@ export class GameAnswerComponent implements OnInit {
   submit() {
     this.submitAnswerEvent.emit(this.userAnswer.value);
   }
-
 }

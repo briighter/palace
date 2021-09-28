@@ -4,7 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { GamePage } from './game.page';
 import { LettersComponent } from './letters/letters.component';
 import { NumbersComponent } from './numbers/numbers.component';
-import { SettingsComponent } from './shared/settings/settings.component';
+import { GameSettingsComponent } from './shared/game-settings/game-settings.component';
 
 const routes: Routes = [
   {
@@ -21,7 +21,7 @@ const routes: Routes = [
   },
   {
     path: 'settings',
-    component: SettingsComponent
+    component: GameSettingsComponent
   }
 ];
 
