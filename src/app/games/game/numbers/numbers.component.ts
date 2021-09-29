@@ -29,7 +29,7 @@ export class NumbersComponent implements OnInit {
 
   beginPlay(playState: boolean) {
     this.numbers = '';
-    this.generateNumbers(2);
+    this.generateNumbers(5);
     this.subjectIsDisplayed = true;
     this.resultIsDisplayed = false;
     this.playing = playState;
@@ -47,11 +47,11 @@ export class NumbersComponent implements OnInit {
   hideNumbers() {
     setTimeout(function() {
       this.subjectIsDisplayed = false;
-    }.bind(this), 1000);
+    }.bind(this), 1500);
 
     setTimeout(() => {
       this.showGetAnswer();
-    }, 1100);
+    }, 1500);
   }
 
   showGetAnswer() {
