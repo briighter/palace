@@ -6,10 +6,19 @@
 
     <ion-list>
       <ion-list-header>
-        Adjust Text
+        How many numbers
       </ion-list-header>
       <ion-item>
-        <ion-range min="14" max="42" step="2" value="24" snaps color="medium">
+        <ion-range min="1" max="500" step="1" value="3" pin snaps color="medium">
+          <ion-icon slot="start" size="small" color="medium" name="text-outline"></ion-icon>
+          <ion-icon slot="end" size="large" color="medium" name="text-outline"></ion-icon>
+        </ion-range>
+      </ion-item>
+      <ion-list-header>
+        Time (Seconds)
+      </ion-list-header>
+      <ion-item>
+        <ion-range min="1" max="15" step="1" value="1" pin snaps color="medium">
           <ion-icon slot="start" size="small" color="medium" name="text-outline"></ion-icon>
           <ion-icon slot="end" size="large" color="medium" name="text-outline"></ion-icon>
         </ion-range>
@@ -18,16 +27,7 @@
         Adjust Text
       </ion-list-header>
       <ion-item>
-        <ion-range min="14" max="42" step="2" value="24" snaps color="medium">
-          <ion-icon slot="start" size="small" color="medium" name="text-outline"></ion-icon>
-          <ion-icon slot="end" size="large" color="medium" name="text-outline"></ion-icon>
-        </ion-range>
-      </ion-item>
-      <ion-list-header>
-        Adjust Text
-      </ion-list-header>
-      <ion-item>
-        <ion-range min="14" max="42" step="2" value="24" snaps color="medium">
+        <ion-range min="14" max="42" step="2" value="24" pin snaps color="medium">
           <ion-icon slot="start" size="small" color="medium" name="text-outline"></ion-icon>
           <ion-icon slot="end" size="large" color="medium" name="text-outline"></ion-icon>
         </ion-range>
