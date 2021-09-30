@@ -32,7 +32,9 @@
 }
 
 .inline-menu-items {
-    display: flex;
-    margin: auto;
-    width: 80%;
+    display: block;
+}
+
+#second-item, #third-item {
+    display: inline-block;
 }
