@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 @Component({
   selector: 'app-game-intro',
@@ -8,6 +8,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class GameIntroComponent implements OnInit {
   @Output() beginPlayEvent = new EventEmitter<boolean>();
   @Output() changeSettingsEvent = new EventEmitter<boolean>();
+  @Input() game;
 
   constructor(private router: Router, private route: ActivatedRoute) { }
 
@@ -21,16 +22,13 @@ export class GameIntroComponent implements OnInit {
     this.beginPlayEvent.emit(true);
   }
 
-  changeSettings() {
-    this.changeSettingsEvent.emit(true);
-  }
-
   resetGameState() {
     this.beginPlayEvent.emit(false);
   }
 
   goToSettings() {
     this.router.navigate(['./../settings'], { relativeTo: this.route });
+    this.changeSettingsEvent.emit(this.game);
   }
 
 }

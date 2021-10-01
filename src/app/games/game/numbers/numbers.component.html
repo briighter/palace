@@ -2,7 +2,7 @@
 
 <ion-content>
   <div *ngIf="!playing" id="top-container">
-    <app-game-intro (beginPlayEvent)="beginPlay($event)"></app-game-intro>
+    <app-game-intro (beginPlayEvent)="beginPlay($event)" [game]="game"></app-game-intro>
   </div>
   <div *ngIf="playing" id="container">
     <h1 *ngIf="subjectIsDisplayed">{{ numbers }}</h1>

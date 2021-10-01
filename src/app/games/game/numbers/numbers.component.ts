@@ -6,6 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./numbers.component.scss'],
 })
 export class NumbersComponent implements OnInit {
+  game = 'numbers'; // Refactor to game enum
   playing = false; //Refactor to game state enum
   min = 0;
   max = 9;
