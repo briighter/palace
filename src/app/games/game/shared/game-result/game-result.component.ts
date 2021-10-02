@@ -9,14 +9,22 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class GameResultComponent implements OnInit {
   @Output() beginPlayEvent = new EventEmitter<boolean>();
-  @Input() gameResult: boolean;
+  @Output() changeSettingsEvent = new EventEmitter<boolean>();
 
+  @Input() gameResult: boolean;
+  @Input() game;
+  
   constructor(private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit() {}
 
   beginPlay() {
     this.beginPlayEvent.emit(true);
+  }
+
+  goToSettings() {
+    this.router.navigate(['./../settings'], { relativeTo: this.route });
+    this.changeSettingsEvent.emit(this.game);
   }
 
   goToGames() {

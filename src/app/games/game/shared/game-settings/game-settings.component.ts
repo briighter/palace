@@ -16,4 +16,8 @@ export class GameSettingsComponent implements OnInit {
   goBack() {
     this.router.navigate(['./../numbers'], { relativeTo: this.route });
   }
+
+  getGame() {
+
+  }
 }
