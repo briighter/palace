@@ -14,6 +14,8 @@ export class NumbersComponent implements OnInit {
   subjectIsDisplayed = false;
   inputIsDisplayed = false;
   resultIsDisplayed = false;
+  settingsIsDisplayed = false;
+
   answers = []; // Refactor to database
   gameResult: boolean;
 
@@ -23,9 +25,12 @@ export class NumbersComponent implements OnInit {
   }
 
   ionViewDidLeave() {
+    this.playing = false;
     this.subjectIsDisplayed = false;
     this.inputIsDisplayed = false;
     this.resultIsDisplayed = false;
+    this.settingsIsDisplayed = false;
+
   }
 
   beginPlay(playState: boolean) {
@@ -71,5 +76,9 @@ export class NumbersComponent implements OnInit {
     this.gameResult = this.checkUserAnswer(ans);
     this.inputIsDisplayed = false;
     this.resultIsDisplayed = true;
+  }
+
+  goToSettings(isDisplayed: boolean){
+    this.settingsIsDisplayed = isDisplayed;
   }
 }

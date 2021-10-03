@@ -13,11 +13,12 @@ export class GameSettingsComponent implements OnInit {
 
   ngOnInit() {}
 
+  saveSettings() {
+
+  }
+
   goBack() {
-    this.router.navigate(['./../numbers'], { relativeTo: this.route });
+    this.router.navigate(['../numbers'], { relativeTo: this.route });
   }
 
-  getGame() {
-
-  }
 }

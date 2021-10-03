@@ -13,7 +13,7 @@ export class GameResultComponent implements OnInit {
 
   @Input() gameResult: boolean;
   @Input() game;
-  
+
   constructor(private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit() {}

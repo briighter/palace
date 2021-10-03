@@ -1,8 +1,8 @@
-<ion-icon name="arrow-back-outline" class="back-arrow" routerLink="/games"></ion-icon>
+<ion-icon *ngIf="!settingsIsDisplayed" name="arrow-back-outline" class="back-arrow" routerLink="/games"></ion-icon>
 
 <ion-content>
-  <div *ngIf="!playing" id="top-container">
-    <app-game-intro (beginPlayEvent)="beginPlay($event)" [game]="game"></app-game-intro>
+  <div *ngIf="!playing && !settingsIsDisplayed" id="top-container">
+    <app-game-intro (beginPlayEvent)="beginPlay($event)" (changeSettingsEvent)="goToSettings($event)" [game]="game"></app-game-intro>
   </div>
   <div *ngIf="playing" id="container">
     <h1 *ngIf="subjectIsDisplayed">{{ numbers }}</h1>
@@ -13,7 +13,7 @@
   <div *ngIf="resultIsDisplayed" id="container">
     <app-game-result (beginPlayEvent)="beginPlay($event)" [gameResult]="gameResult"></app-game-result>
   </div>
-  <div>
-    <app-game-settings (changeSettingsEvent)="$event"></app-game-settings>
+  <div *ngIf="settingsIsDisplayed" id="container">
+    <app-game-settings></app-game-settings>
   </div>
 </ion-content>
