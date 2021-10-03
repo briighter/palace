@@ -13,4 +13,7 @@
   <div *ngIf="resultIsDisplayed" id="container">
     <app-game-result (beginPlayEvent)="beginPlay($event)" [gameResult]="gameResult"></app-game-result>
   </div>
+  <div>
+    <app-game-settings (changeSettingsEvent)="$event"></app-game-settings>
+  </div>
 </ion-content>
