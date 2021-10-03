@@ -78,7 +78,7 @@ export class NumbersComponent implements OnInit {
     this.resultIsDisplayed = true;
   }
 
-  goToSettings(isDisplayed: boolean){
+  toggleSettings(isDisplayed: boolean){
     this.settingsIsDisplayed = isDisplayed;
   }
 }
