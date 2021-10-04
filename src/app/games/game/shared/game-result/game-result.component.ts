@@ -23,8 +23,7 @@ export class GameResultComponent implements OnInit {
   }
 
   goToSettings() {
-    this.router.navigate(['./../settings'], { relativeTo: this.route });
-    this.changeSettingsEvent.emit(this.game);
+    this.changeSettingsEvent.emit(true);
   }
 
   goToGames() {
