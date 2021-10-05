@@ -81,4 +81,9 @@ export class NumbersComponent implements OnInit {
   toggleSettings(isDisplayed: boolean){
     this.settingsIsDisplayed = isDisplayed;
   }
+
+  updateSettings(settings: any) {
+    console.log(settings);
+    this.toggleSettings(true);
+  }
 }

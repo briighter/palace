@@ -1,6 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormControl } from '@angular/forms';
-import { Router, ActivatedRoute } from '@angular/router';
+import { FormGroup, FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-game-settings',
@@ -9,24 +8,28 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class GameSettingsComponent implements OnInit {
   @Output() goBackEvent = new EventEmitter<boolean>();
+  @Output() submitSettingsEvent = new EventEmitter<any>();
   @Input() game;
   finalTime: string;
 
-  length = new FormControl('');
-  timeMinutes = new FormControl('');
-  timeSeconds = new FormControl('');
-  fontSize = new FormControl('');
+  settingsForm = new FormGroup({
+    length: new FormControl(''),
+    timeMinutes: new FormControl(''),
+    timeSeconds: new FormControl(''),
+    fontSize: new FormControl('')
+  });
 
-  constructor(private router: Router, private route: ActivatedRoute) { }
+  constructor() { }
 
   ngOnInit() {}
 
-  saveSettings() {
-
+  onSubmit() {
+    console.log('Inside Settings');
+    console.log(this.settingsForm.value);
+    this.submitSettingsEvent.emit(this.settingsForm.value);
   }
 
   goBack() {
-    // this.router.navigate(['../numbers'], { relativeTo: this.route });
     this.goBackEvent.emit(false);
   }
 
