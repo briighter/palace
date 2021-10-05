@@ -18,6 +18,8 @@ export class NumbersComponent implements OnInit {
 
   answers = []; // Refactor to database
   gameResult: boolean;
+  numbersLength: any;
+  timeMinutes: any;
 
   constructor() { }
 
@@ -35,7 +37,7 @@ export class NumbersComponent implements OnInit {
 
   beginPlay(playState: boolean) {
     this.numbers = '';
-    this.generateNumbers(5);
+    this.generateNumbers(this.numbersLength);
     this.subjectIsDisplayed = true;
     this.resultIsDisplayed = false;
     this.playing = playState;
@@ -83,7 +85,9 @@ export class NumbersComponent implements OnInit {
   }
 
   updateSettings(settings: any) {
-    console.log(settings);
+    console.log('inside numbers');
+    this.numbersLength = settings.length;
+    this.timeMinutes = settings.timeMinutes;
     this.toggleSettings(true);
   }
 }
