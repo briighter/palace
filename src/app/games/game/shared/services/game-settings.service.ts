@@ -1,20 +1,24 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 
+interface Settings {
+  length: number;
+  timeMinutes: number;
+  timeSeconds: number;
+  fontSize: number;
+}
+
 @Injectable({
   providedIn: 'root'
 })
 export class GameSettingsService {
   // Observable string sources
-  gameNameSource = new Subject<string>();
+  private settingsSource = new Subject<Settings>();
 
   // Observable string streams
-  missionAnnounced$ = this.gameNameSource.asObservable();
-
+  settings$ = this.settingsSource.asObservable();
+  
   constructor() { }
 
-  // Service message commands
-  // announceMission(mission: string) {
-  //   this.missionAnnouncedSource.next(mission);
-  // }
+
 }
