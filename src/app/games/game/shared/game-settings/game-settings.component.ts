@@ -13,9 +13,9 @@ export class GameSettingsComponent implements OnInit {
   finalTime: string;
 
   settingsForm = new FormGroup({
-    length: new FormControl(''),
-    timeMinutes: new FormControl(''),
-    timeSeconds: new FormControl(''),
+    length: new FormControl(5),
+    timeMinutes: new FormControl(0),
+    timeSeconds: new FormControl(2),
     fontSize: new FormControl('')
   });
 

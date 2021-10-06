@@ -18,8 +18,11 @@ export class NumbersComponent implements OnInit {
 
   answers = []; // Refactor to database
   gameResult: boolean;
-  numbersLength: any;
-  timeMinutes: any;
+  numbersLength: number;
+  timeMinutes: number;
+  timeSeconds: number;
+  fontSize: number;
+  timeMilli: number;
 
   constructor() { }
 
@@ -32,7 +35,6 @@ export class NumbersComponent implements OnInit {
     this.inputIsDisplayed = false;
     this.resultIsDisplayed = false;
     this.settingsIsDisplayed = false;
-
   }
 
   beginPlay(playState: boolean) {
@@ -55,11 +57,11 @@ export class NumbersComponent implements OnInit {
   hideNumbers() {
     setTimeout(function() {
       this.subjectIsDisplayed = false;
-    }.bind(this), 1500);
+    }.bind(this), this.timeMilli);
 
     setTimeout(() => {
       this.showGetAnswer();
-    }, 1500);
+    }, this.timeMilli);
   }
 
   showGetAnswer() {
@@ -88,6 +90,21 @@ export class NumbersComponent implements OnInit {
     console.log('inside numbers');
     this.numbersLength = settings.length;
     this.timeMinutes = settings.timeMinutes;
+    this.timeSeconds = settings.timeSeconds;
+    this.fontSize = settings.fontSize;
+    this.convertTimeToMili(this.timeMinutes,this.timeSeconds);
     this.toggleSettings(true);
+  }
+
+  convertTimeToMili(minutes: number, seconds: number) {
+    let timeMilliseconds: number;
+    let minToMilli: number;
+    let secToMilli: number;
+
+    minToMilli = (minutes * 60) * 1000;
+    secToMilli = seconds * 1000;
+    timeMilliseconds = minToMilli + secToMilli;
+
+    this.timeMilli = timeMilliseconds;
   }
 }
