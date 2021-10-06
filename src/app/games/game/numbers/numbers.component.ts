@@ -18,11 +18,11 @@ export class NumbersComponent implements OnInit {
 
   answers = []; // Refactor to database
   gameResult: boolean;
-  numbersLength: number;
+  numbersLength = 5;
   timeMinutes: number;
   timeSeconds: number;
   fontSize: number;
-  timeMilli: number;
+  timeMilli = 1000;
 
   constructor() { }
 
@@ -92,18 +92,15 @@ export class NumbersComponent implements OnInit {
     this.timeMinutes = settings.timeMinutes;
     this.timeSeconds = settings.timeSeconds;
     this.fontSize = settings.fontSize;
-    this.convertTimeToMili(this.timeMinutes,this.timeSeconds);
+    this.convertTimeToMili(this.timeMinutes, this.timeSeconds);
     this.toggleSettings(true);
   }
 
   convertTimeToMili(minutes: number, seconds: number) {
-    let timeMilliseconds: number;
-    let minToMilli: number;
-    let secToMilli: number;
+    const minToMilli = (minutes * 60) * 1000;;
+    const secToMilli = seconds * 1000;;
 
-    minToMilli = (minutes * 60) * 1000;
-    secToMilli = seconds * 1000;
-    timeMilliseconds = minToMilli + secToMilli;
+    const timeMilliseconds = minToMilli + secToMilli;
 
     this.timeMilli = timeMilliseconds;
   }
