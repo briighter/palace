@@ -17,7 +17,7 @@ interface Settings {
 })
 export class GameSettingsComponent implements OnInit {
   @Output() goBackEvent = new EventEmitter<boolean>();
-  @Output() submitSettingsEvent = new EventEmitter<Settings>();
+  // @Output() submitSettingsEvent = new EventEmitter<Settings>();
   @Input() game;
 
   settings: Settings = {
@@ -34,18 +34,21 @@ export class GameSettingsComponent implements OnInit {
     fontSize: new FormControl()
   });
 
-  constructor(private settingService: GameSettingsService) { 
-   }
+  constructor(private settingService: GameSettingsService) {}
 
   ngOnInit() {}
 
   onSubmit() {
-    this.submitSettingsEvent.emit(this.settingsForm.value);
+    this.settingService.updateSettings(this.settingsForm.value);
+    // this.submitSettingsEvent.emit(this.settingsForm.value);
     this.goBackEvent.emit(false);
   }
 
   goBack() {
     this.goBackEvent.emit(false);
+  }
+
+  buildSettingsObject() {
   }
 
 }

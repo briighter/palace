@@ -1,11 +1,20 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { GameSettingsService } from '../shared/services/game-settings.service';
+
+interface Settings {
+  length: number;
+  timeMinutes: number;
+  timeSeconds: number;
+  fontSize: number;
+}
 
 @Component({
   selector: 'app-numbers',
   templateUrl: './numbers.component.html',
   styleUrls: ['./numbers.component.scss'],
 })
-export class NumbersComponent implements OnInit {
+export class NumbersComponent implements OnInit, OnDestroy {
   game = 'numbers'; // Refactor to game enum
   playing = false; //Refactor to game state enum
   min = 0;
@@ -18,13 +27,23 @@ export class NumbersComponent implements OnInit {
 
   answers = []; // Refactor to database
   gameResult: boolean;
+
+  settings: Settings;
   numbersLength = 5;
   timeMinutes: number;
   timeSeconds: number;
   fontSize: number;
   timeMilli = 1000;
 
-  constructor() { }
+  settingsSubscription: Subscription;
+
+  constructor(private settingService: GameSettingsService) {
+    this.settingsSubscription = settingService.settingsSource.subscribe(
+      settings => {
+        this.settings = settings;
+      }
+    );
+  }
 
   ngOnInit() {
   }
@@ -35,6 +54,11 @@ export class NumbersComponent implements OnInit {
     this.inputIsDisplayed = false;
     this.resultIsDisplayed = false;
     this.settingsIsDisplayed = false;
+  }
+
+  ngOnDestroy() {
+    // prevent memory leak when component destroyed
+    this.settingsSubscription.unsubscribe();
   }
 
   beginPlay(playState: boolean) {
