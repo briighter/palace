@@ -87,7 +87,6 @@ export class NumbersComponent implements OnInit {
   }
 
   updateSettings(settings: any) {
-    console.log('inside numbers');
     this.numbersLength = settings.length;
     this.timeMinutes = settings.timeMinutes;
     this.timeSeconds = settings.timeSeconds;

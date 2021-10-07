@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
+import { GameSettingsService } from '../services/game-settings.service';
 
 interface Settings {
   length: number;
@@ -12,6 +13,7 @@ interface Settings {
   selector: 'app-game-settings',
   templateUrl: './game-settings.component.html',
   styleUrls: ['./game-settings.component.scss'],
+  providers: [GameSettingsService]
 })
 export class GameSettingsComponent implements OnInit {
   @Output() goBackEvent = new EventEmitter<boolean>();
@@ -32,13 +34,12 @@ export class GameSettingsComponent implements OnInit {
     fontSize: new FormControl()
   });
 
-  constructor() { }
+  constructor(private settingService: GameSettingsService) { 
+   }
 
   ngOnInit() {}
 
   onSubmit() {
-    console.log('Inside Settings');
-    console.log(this.settingsForm.value);
     this.submitSettingsEvent.emit(this.settingsForm.value);
     this.goBackEvent.emit(false);
   }
