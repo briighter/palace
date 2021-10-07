@@ -13,12 +13,16 @@ interface Settings {
 })
 export class GameSettingsService {
   // Observable string sources
-  private settingsSource = new Subject<Settings>();
+  settingsSource = new Subject<Settings>();
 
   // Observable string streams
   settings$ = this.settingsSource.asObservable();
-  
+
   constructor() { }
 
+  // Service message commands
+  getSettings(settings: Settings) {
+    this.settingsSource.next(settings);
+  }
 
 }
