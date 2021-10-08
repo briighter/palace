@@ -3,10 +3,10 @@ import { FormGroup, FormControl } from '@angular/forms';
 import { GameSettingsService } from '../services/game-settings.service';
 
 interface Settings {
-  length: number;
-  timeMinutes: number;
-  timeSeconds: number;
-  fontSize: number;
+  length?: number;
+  timeMinutes?: number;
+  timeSeconds?: number;
+  fontSize?: number;
 }
 
 @Component({
@@ -20,12 +20,7 @@ export class GameSettingsComponent implements OnInit {
   // @Output() submitSettingsEvent = new EventEmitter<Settings>();
   @Input() game;
 
-  settings: Settings = {
-    length: 5,
-    timeMinutes: 0,
-    timeSeconds: 3,
-    fontSize: 0
-  };
+  settings: Settings = {};
 
   settingsForm = new FormGroup({
     length: new FormControl(this.settings.length),

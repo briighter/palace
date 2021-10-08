@@ -41,6 +41,10 @@ export class NumbersComponent implements OnInit, OnDestroy {
     this.settingsSubscription = settingService.settingsSource.subscribe(
       settings => {
         this.settings = settings;
+        this.numbersLength = settings.length;
+        this.timeMinutes = settings.timeMinutes;
+        this.timeSeconds = settings.timeSeconds;
+        this.fontSize = settings.fontSize;
       }
     );
   }
@@ -62,6 +66,7 @@ export class NumbersComponent implements OnInit, OnDestroy {
   }
 
   beginPlay(playState: boolean) {
+    console.log(this.settings);
     this.numbers = '';
     this.generateNumbers(this.numbersLength);
     this.subjectIsDisplayed = true;
