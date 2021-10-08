@@ -17,7 +17,7 @@ interface Settings {
 })
 export class GameSettingsComponent implements OnInit {
   @Output() goBackEvent = new EventEmitter<boolean>();
-  // @Output() submitSettingsEvent = new EventEmitter<Settings>();
+  @Output() updateSettingsEvent = new EventEmitter<Settings>();
   @Input() game;
 
   settings: Settings = {
@@ -40,7 +40,7 @@ export class GameSettingsComponent implements OnInit {
 
   onSubmit() {
     this.settingService.updateSettings(this.settingsForm.value);
-    // this.submitSettingsEvent.emit(this.settingsForm.value);
+    this.updateSettingsEvent.emit();
     this.goBackEvent.emit(false);
   }
 

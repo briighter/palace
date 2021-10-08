@@ -38,7 +38,7 @@ export class NumbersComponent implements OnInit, OnDestroy {
   settingsSubscription: Subscription;
 
   constructor(private settingService: GameSettingsService) {
-    this.settingsSubscription = settingService.settingsSource.subscribe(
+    this.settingsSubscription = settingService.settings$.subscribe(
       settings => {
         this.settings = settings;
       }
@@ -110,11 +110,11 @@ export class NumbersComponent implements OnInit, OnDestroy {
     this.settingsIsDisplayed = isDisplayed;
   }
 
-  updateSettings(settings: any) {
-    this.numbersLength = settings.length;
-    this.timeMinutes = settings.timeMinutes;
-    this.timeSeconds = settings.timeSeconds;
-    this.fontSize = settings.fontSize;
+  updateSettings() {
+    this.numbersLength = this.settings.length;
+    this.timeMinutes = this.settings.timeMinutes;
+    this.timeSeconds = this.settings.timeSeconds;
+    this.fontSize = this.settings.fontSize;
     this.convertTimeToMili(this.timeMinutes, this.timeSeconds);
     this.toggleSettings(true);
   }
