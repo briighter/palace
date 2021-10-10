@@ -35,7 +35,7 @@ export class GameSettingsComponent implements OnInit {
 
   onSubmit() {
     this.settingService.updateSettings(this.settingsForm.value);
-    this.updateSettingsEvent.emit();
+    // this.updateSettingsEvent.emit();
     this.goBackEvent.emit(false);
   }
 
