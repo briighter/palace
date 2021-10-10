@@ -38,6 +38,15 @@ export class NumbersComponent implements OnInit, OnDestroy {
   settingsSubscription: Subscription;
 
   constructor(private settingService: GameSettingsService) {
+    this.settingsSubscription = this.settingService.settings$.subscribe(
+      settings => {
+        this.settings = settings;
+        this.numbersLength = settings.length;
+        this.timeMinutes = settings.timeMinutes;
+        this.timeSeconds = settings.timeSeconds;
+        this.fontSize = settings.fontSize;
+      }
+    );
   }
 
   ngOnInit() {
@@ -107,16 +116,6 @@ export class NumbersComponent implements OnInit, OnDestroy {
   }
 
   updateSettings() {
-    this.settingsSubscription = this.settingService.settings$.subscribe(
-      settings => {
-        this.settings = settings;
-        this.numbersLength = settings.length;
-        this.timeMinutes = settings.timeMinutes;
-        this.timeSeconds = settings.timeSeconds;
-        this.fontSize = settings.fontSize;
-      }
-    );
-    console.log(this.settingsSubscription);
     this.numbersLength = this.settings.length;
     this.timeMinutes = this.settings.timeMinutes;
     this.timeSeconds = this.settings.timeSeconds;
