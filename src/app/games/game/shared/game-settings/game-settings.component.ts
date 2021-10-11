@@ -12,8 +12,7 @@ interface Settings {
 @Component({
   selector: 'app-game-settings',
   templateUrl: './game-settings.component.html',
-  styleUrls: ['./game-settings.component.scss'],
-  providers: [GameSettingsService]
+  styleUrls: ['./game-settings.component.scss']
 })
 export class GameSettingsComponent implements OnInit {
   @Output() goBackEvent = new EventEmitter<boolean>();
@@ -35,15 +34,12 @@ export class GameSettingsComponent implements OnInit {
 
   onSubmit() {
     this.settingService.updateSettings(this.settingsForm.value);
-    // this.updateSettingsEvent.emit();
+    this.updateSettingsEvent.emit();
     this.goBackEvent.emit(false);
   }
 
   goBack() {
     this.goBackEvent.emit(false);
-  }
-
-  buildSettingsObject() {
   }
 
 }

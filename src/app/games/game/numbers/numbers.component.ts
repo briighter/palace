@@ -28,17 +28,22 @@ export class NumbersComponent implements OnInit, OnDestroy {
   answers = []; // Refactor to database
   gameResult: boolean;
 
-  settings: Settings;
-  numbersLength = 5;
-  timeMinutes: number;
-  timeSeconds: number;
-  fontSize: number;
+  settings: Settings = {
+    length: 6,
+    timeMinutes: 0,
+    timeSeconds: 0,
+    fontSize: 0
+  };
   timeMilli = 1000;
 
   settingsSubscription: Subscription;
 
   constructor(private settingService: GameSettingsService) {
-
+    this.settingsSubscription = settingService.settings$.subscribe(
+      settings => {
+        this.settings = settings;
+      }
+    );
   }
 
   ngOnInit() {
@@ -59,9 +64,8 @@ export class NumbersComponent implements OnInit, OnDestroy {
   }
 
   beginPlay(playState: boolean) {
-    console.log(this.settings);
     this.numbers = '';
-    this.generateNumbers(this.numbersLength);
+    this.generateNumbers(this.settings.length);
     this.subjectIsDisplayed = true;
     this.resultIsDisplayed = false;
     this.playing = playState;
@@ -109,20 +113,7 @@ export class NumbersComponent implements OnInit, OnDestroy {
   }
 
   updateSettings() {
-    this.settingService.settings$.subscribe(
-      settings => {
-        this.settings = settings;
-        this.numbersLength = settings.length;
-        this.timeMinutes = settings.timeMinutes;
-        this.timeSeconds = settings.timeSeconds;
-        this.fontSize = settings.fontSize;
-      }
-    );
-    this.numbersLength = this.settings.length;
-    this.timeMinutes = this.settings.timeMinutes;
-    this.timeSeconds = this.settings.timeSeconds;
-    this.fontSize = this.settings.fontSize;
-    this.convertTimeToMili(this.timeMinutes, this.timeSeconds);
+    this.convertTimeToMili(this.settings.timeMinutes, this.settings.timeSeconds);
     this.toggleSettings(true);
   }
 

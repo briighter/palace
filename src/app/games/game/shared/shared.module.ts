@@ -7,6 +7,7 @@ import { GameAnswerComponent } from './game-answer/game-answer.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { GameResultComponent } from './game-result/game-result.component';
 import { GameSettingsComponent } from './game-settings/game-settings.component';
+import { GameSettingsService } from './services/game-settings.service';
 
 
 
@@ -17,11 +18,13 @@ import { GameSettingsComponent } from './game-settings/game-settings.component';
     IonicModule,
     ReactiveFormsModule
   ],
+  providers: [GameSettingsService],
   exports: [
     GameIntroComponent,
     GameAnswerComponent,
     GameResultComponent,
-    GameSettingsComponent
+    GameSettingsComponent,
+    GameSettingsService
   ]
 })
 export class SharedModule { }
