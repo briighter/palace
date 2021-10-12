@@ -24,7 +24,6 @@ import { GameSettingsService } from './services/game-settings.service';
     GameAnswerComponent,
     GameResultComponent,
     GameSettingsComponent,
-    GameSettingsService
   ]
 })
 export class SharedModule { }
