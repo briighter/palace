@@ -306,6 +306,11 @@
     --ion-color-light-tint: #f5f6f9;
   }
 
+ion-button {
+  --border-color: #000000;
+  --border-radius: 25px;
+  --border-width: 3px;
+}
   /*
    * iOS Light Theme
    * -------------------------------------------
