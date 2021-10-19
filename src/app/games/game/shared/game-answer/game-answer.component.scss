@@ -8,6 +8,11 @@ ion-item {
     --color: #000000;
 }
 
+
+.item-has-focus {
+    --highlight-color-valid: transparent;
+}
+
 ion-button {
     margin-top: 30px;
 }
