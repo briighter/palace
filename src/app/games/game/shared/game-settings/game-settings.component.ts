@@ -20,8 +20,6 @@ export class GameSettingsComponent implements OnInit {
   @Input() game;
   @Input() settings: Settings = {};
 
-  // this.settings: Settings = {};
-
   settingsForm = new FormGroup({
     length: new FormControl(this.settings.length),
     timeMinutes: new FormControl(this.settings.timeMinutes),
@@ -32,7 +30,6 @@ export class GameSettingsComponent implements OnInit {
   constructor(private settingService: GameSettingsService) {}
 
   ngOnInit() {
-    console.log(this.settings);
   }
 
   onSubmit() {
