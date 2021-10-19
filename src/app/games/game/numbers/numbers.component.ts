@@ -28,13 +28,14 @@ export class NumbersComponent implements OnInit, OnDestroy {
   answers = []; // Refactor to database
   gameResult: boolean;
 
+  // Initialize settings
   settings: Settings = {
     length: 6,
     timeMinutes: 0,
-    timeSeconds: 0,
+    timeSeconds: 1,
     fontSize: 0
   };
-  timeMilli = 1000;
+  timeMilli = this.settings.timeSeconds * 1000;
 
   settingsSubscription: Subscription;
 

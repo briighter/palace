@@ -18,8 +18,9 @@ export class GameSettingsComponent implements OnInit {
   @Output() goBackEvent = new EventEmitter<boolean>();
   @Output() updateSettingsEvent = new EventEmitter<Settings>();
   @Input() game;
+  @Input() settings: Settings = {};
 
-  settings: Settings = {};
+  // this.settings: Settings = {};
 
   settingsForm = new FormGroup({
     length: new FormControl(this.settings.length),
@@ -30,7 +31,9 @@ export class GameSettingsComponent implements OnInit {
 
   constructor(private settingService: GameSettingsService) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    console.log(this.settings);
+  }
 
   onSubmit() {
     this.settingService.updateSettings(this.settingsForm.value);
