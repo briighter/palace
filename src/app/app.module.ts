@@ -1,5 +1,6 @@
 import { AuthModule } from '@auth0/auth0-angular';
 import config from './../../capacitor.config.json';
+import { environment as env } from '../environments/environment';
 
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -25,7 +26,8 @@ const redirectUri = `${config.appId}://dev--y0shigw.us.auth0.com/capacitor/${con
     AuthModule.forRoot({
       domain: 'dev--y0shigw.us.auth0.com',
       clientId: '13ZgOQwcgyXvHFYMw8gQN85NYpn26Dqs',
-      redirectUri
+      redirectUri,
+      ...env.auth
     }),
   ],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
