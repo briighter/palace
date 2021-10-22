@@ -11,6 +11,7 @@ import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { ReactiveFormsModule } from '@angular/forms';
+import { SharedModule } from './shared/shared.module';
 
 // Build the URL that Auth0 should redirect back to
 const redirectUri = `${config.appId}://dev--y0shigw.us.auth0.com/capacitor/${config.appId}/callback`;
@@ -24,11 +25,10 @@ const redirectUri = `${config.appId}://dev--y0shigw.us.auth0.com/capacitor/${con
     AppRoutingModule,
     ReactiveFormsModule,
     AuthModule.forRoot({
-      domain: 'dev--y0shigw.us.auth0.com',
-      clientId: '13ZgOQwcgyXvHFYMw8gQN85NYpn26Dqs',
       redirectUri,
       ...env.auth
     }),
+    SharedModule
   ],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],

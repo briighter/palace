@@ -7,9 +7,11 @@ import { HomePage } from './home.page';
 import { HomePageRoutingModule } from './home-routing.module';
 import { HomeMenuComponent } from './home-menu/home-menu.component';
 import { HomeTitleComponent } from './home-title/home-title.component';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   imports: [
+    SharedModule,
     CommonModule,
     FormsModule,
     IonicModule,
