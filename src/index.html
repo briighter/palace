@@ -8,7 +8,8 @@
   <base href="/" />
 
   <meta name="color-scheme" content="light dark" />
-  <meta name="viewport" content="viewport-fit=cover, width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="viewport"
+    content="viewport-fit=cover, width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <meta name="format-detection" content="telephone=no" />
   <meta name="msapplication-tap-highlight" content="no" />
 
@@ -21,6 +22,30 @@
 
 <body>
   <app-root></app-root>
+  <script>
+    // Query for the toggle that is used to change between themes
+    const toggle = document.querySelector('#themeToggle');
+
+    // Listen for the toggle check/uncheck to toggle the dark class on the <body>
+    toggle.addEventListener('ionChange', (ev) => {
+      document.body.classList.toggle('dark', ev.detail.checked);
+    });
+
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+
+    // Listen for changes to the prefers-color-scheme media query
+    prefersDark.addListener((e) => checkToggle(e.matches));
+
+    // Called when the app loads
+    function loadApp() {
+      checkToggle(prefersDark.matches);
+    }
+
+    // Called by the media query to check/uncheck the toggle
+    function checkToggle(shouldCheck) {
+      toggle.checked = shouldCheck;
+    }
+  </script>
 </body>
 
 </html>

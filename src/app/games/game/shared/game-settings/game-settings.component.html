@@ -3,16 +3,19 @@
   <ion-list>
     <ion-item id="first-item">
       <ion-label position="floating">How many {{ game }}?</ion-label>
-      <ion-input type="number" inputmode="numeric" formControlName="length" [(ngModel)]="this.settings.length"></ion-input>
+      <ion-input type="number" inputmode="numeric" formControlName="length" [(ngModel)]="this.settings.length">
+      </ion-input>
     </ion-item>
     <div class="inline-menu-items">
       <ion-item id="second-item">
         <ion-label>Minutes?</ion-label>
-        <ion-input type="number" inputmode="numeric" formControlName="timeMinutes" [(ngModel)]="this.settings.timeMinutes"></ion-input>
+        <ion-input type="number" inputmode="numeric" formControlName="timeMinutes"
+          [(ngModel)]="this.settings.timeMinutes"></ion-input>
       </ion-item>
       <ion-item id="third-item">
         <ion-label>Seconds?</ion-label>
-        <ion-input type="number" inputmode="numeric" formControlName="timeSeconds" [(ngModel)]="this.settings.timeSeconds"></ion-input>
+        <ion-input type="number" inputmode="numeric" formControlName="timeSeconds"
+          [(ngModel)]="this.settings.timeSeconds"></ion-input>
       </ion-item>
     </div>
     <ion-list-header>
@@ -30,4 +33,3 @@
     <ion-button color="light" (click)="goBack()">Go Back</ion-button>
   </div>
 </form>
-
