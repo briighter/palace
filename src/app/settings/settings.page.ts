@@ -6,37 +6,42 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./settings.page.scss'],
 })
 export class SettingsPage implements OnInit {
-  // Query for the toggle that is used to change between themes
-  toggle = document.querySelector('#themeToggle') as HTMLIonToggleElement;
-  prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+
 
   constructor() {
-    if (this.toggle) {
-      // Listen for the toggle check/uncheck to toggle the dark class on the <body>
-      this.toggle.addEventListener('ionChange', (ev) => {
-        document.body.classList.toggle('dark', (<any>ev).detail.checked);
-      });
-    }
+    // Query for the toggle that is used to change between themes
+    const toggle = document.querySelector('#themeToggle');
+
+    // Listen for the toggle check/uncheck to toggle the dark class on the <body>
+    toggle.addEventListener('ionChange', (ev) => {
+      document.body.classList.toggle('dark', (ev as any).detail.checked);
+    });
+
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
 
     // Listen for changes to the prefers-color-scheme media query
-    this.prefersDark.addListener((e) => this.checkToggle(e.matches));
+    prefersDark.addListener((e) => this.checkToggle(e.matches));
+    this.checkToggle(prefersDark.matches);
+    // Called when the app loads
+    // function loadApp() {
+    //   checkToggle(prefersDark.matches);
+    // }
 
+    // Called by the media query to check/uncheck the toggle
+    // function checkToggle(shouldCheck) {
+    //   toggle.checked = shouldCheck;
+    // }
   }
 
   ngOnInit() {
-    if (this.toggle) {
-      this.checkToggle(this.prefersDark.matches);
-    }
   }
 
-  // Called when the app loads
   // loadApp() {
-  //   this.checkToggle(this.prefersDark.matches);
+  //   checkToggle(prefersDark.matches);
   // }
 
-  // Called by the media query to check/uncheck the toggle
   checkToggle(shouldCheck) {
-    this.toggle.checked = shouldCheck;
+    toggle.checked = shouldCheck;
   }
 
 }
