@@ -1,5 +1,4 @@
-// Query for the toggle that is used to change between themes
-const toggle = document.querySelector('#themeToggle');
+var toggle = document.querySelector('#themeToggle');
 
 if (toggle) {
     // Listen for the toggle check/uncheck to toggle the dark class on the <body>
