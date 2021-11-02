@@ -1,14 +1,16 @@
-var toggle = document.querySelector('#themeToggle');
+// Query for the toggle that is used to change between themes
+toggle = document.querySelector('#themeToggle');
 
 if (toggle) {
     // Listen for the toggle check/uncheck to toggle the dark class on the <body>
-    toggle.addEventListener('ionChange', (ev) => {
+    toggle.addEventListener('ionChange', function (ev) {
         document.body.classList.toggle('dark', ev.detail.checked);
     });
 }
 
+console.log(toggle);
 
-const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
 
 // Listen for changes to the prefers-color-scheme media query
 prefersDark.addListener((e) => checkToggle(e.matches));
