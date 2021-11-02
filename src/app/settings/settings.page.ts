@@ -7,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SettingsPage implements OnInit {
 
+  prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
 
   constructor() {}
 
@@ -18,6 +19,12 @@ export class SettingsPage implements OnInit {
       document.body.setAttribute('color-theme','dark');
     } else {
       document.body.setAttribute('color-theme','light');
+    }
+  }
+
+  checkThemePreference(theme){
+    if(theme.matches){
+      theme.media = '(prefers-color-scheme: dark)';
     }
   }
 }
