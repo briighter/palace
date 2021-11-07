@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-interface gameHistory {
+export interface GameHistory {
   game: string;
   numberOfItems: string;
   numberofSeconds: string;
@@ -13,9 +13,12 @@ interface gameHistory {
   styleUrls: ['./profile-stats.component.scss'],
 })
 export class ProfileStatsComponent implements OnInit {
-  
+  gameStats: GameHistory[] = [
+    game: '',
+  ];
+
   constructor() { }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
 }
