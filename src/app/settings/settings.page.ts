@@ -15,8 +15,10 @@ export class SettingsPage implements OnInit {
   toggleTheme(event){
     if (event.detail.checked) {
       document.body.setAttribute('color-theme','dark');
+      localStorage.setItem('color-theme','dark');
     } else {
       document.body.setAttribute('color-theme','light');
+      localStorage.setItem('color-theme','light');
     }
   }
 
