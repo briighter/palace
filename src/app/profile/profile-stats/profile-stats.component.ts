@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 
 export interface GameHistory {
   game: string;
-  numberOfItems: string;
-  numberofSeconds: string;
+  numberOfItems: number;
+  numberofSeconds: number;
   result: string;
 }
 
@@ -14,7 +14,36 @@ export interface GameHistory {
 })
 export class ProfileStatsComponent implements OnInit {
   gameStats: GameHistory[] = [
-    game: '',
+    {
+      game: 'numbers',
+      numberOfItems: 4,
+      numberofSeconds: 20,
+      result: 'w'
+    },
+    {
+      game: 'numbers',
+      numberOfItems: 5,
+      numberofSeconds: 10,
+      result: 'w'
+    },
+    {
+      game: 'numbers',
+      numberOfItems: 6,
+      numberofSeconds: 10,
+      result: 'w'
+    },
+    {
+      game: 'numbers',
+      numberOfItems: 10,
+      numberofSeconds: 10,
+      result: 'l'
+    },
+    {
+      game: 'letters',
+      numberOfItems: 5,
+      numberofSeconds: 10,
+      result: 'w'
+    },
   ];
 
   constructor() { }
