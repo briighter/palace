@@ -1,6 +1,8 @@
 <ion-app>
   <div class="container" *ngIf="auth.isLoading$ | async; else loaded">
-    <div class="loader"></div>
+    <div class="loader">
+      <img src="../../assets/icon/palace_logo.png">
+    </div>
   </div>
   <ng-template #loaded>
     <ion-router-outlet></ion-router-outlet>
