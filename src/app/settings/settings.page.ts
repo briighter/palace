@@ -6,10 +6,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./settings.page.scss'],
 })
 export class SettingsPage implements OnInit {
-
+  preferredTheme = localStorage.getItem('color-theme');;
   constructor() {}
 
   ngOnInit() {
+    this.checkPreferredTheme();
   }
 
   toggleTheme(event){
@@ -19,6 +20,13 @@ export class SettingsPage implements OnInit {
     } else {
       document.body.setAttribute('color-theme','light');
       localStorage.setItem('color-theme','light');
+    }
+  }
+
+  checkPreferredTheme() {
+    if (this.preferredTheme === 'dark') {
+      const themeToggle = document.getElementById('themeToggle') as HTMLIonToggleElement;
+      themeToggle.setAttribute('checked','');
     }
   }
 
