@@ -17,14 +17,11 @@ const routes: Routes = [
     loadChildren: () => import('./games/games.module').then( m => m.GamesPageModule)
   },
   {
-    path: 'login',
-    loadChildren: () => import('./shared/login/login.module').then( m => m.LoginPageModule)
-  },
-  {
     path: 'profile',
     loadChildren: () => import('./profile/profile.module').then( m => m.ProfilePageModule),
     canActivate: [AuthGuard]
-  },  {
+  },
+  {
     path: 'settings',
     loadChildren: () => import('./settings/settings.module').then( m => m.SettingsPageModule)
   },
