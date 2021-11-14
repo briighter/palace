@@ -1,11 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { GameHistory } from 'src/app/shared/models/game-history';
 
-export interface GameHistory {
-  game: string;
-  numberOfItems: number;
-  numberofSeconds: number;
-  result: string;
-}
 
 @Component({
   selector: 'app-profile-stats',
