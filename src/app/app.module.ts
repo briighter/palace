@@ -12,6 +12,7 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from './shared/shared.module';
+import { HttpClientModule } from '@angular/common/http';
 
 // Build the URL that Auth0 should redirect back to
 const redirectUri = `${config.appId}://dev--y0shigw.us.auth0.com/capacitor/${config.appId}/callback`;
@@ -21,6 +22,7 @@ const redirectUri = `${config.appId}://dev--y0shigw.us.auth0.com/capacitor/${con
   entryComponents: [],
   imports: [
     BrowserModule,
+    HttpClientModule,
     IonicModule.forRoot(),
     AppRoutingModule,
     ReactiveFormsModule,
