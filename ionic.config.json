@@ -1,7 +1,0 @@
-{
-  "name": "palace",
-  "integrations": {
-    "capacitor": {}
-  },
-  "type": "angular"
-}
