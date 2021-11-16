@@ -3,7 +3,7 @@ import { AuthService } from '@auth0/auth0-angular';
 import { mergeMap } from 'rxjs/operators';
 import { Browser } from '@capacitor/browser';
 import { App } from '@capacitor/app';
-import config from './../../capacitor.config.json';
+import config from '../../capacitor.config.json';
 
 const callbackUri = `${config.appId}://dev--y0shigw.us.auth0.com/capacitor/${config.appId}/callback`;
 

@@ -1,5 +1,5 @@
 import { AuthModule } from '@auth0/auth0-angular';
-import config from './../../capacitor.config.json';
+import config from '../../capacitor.config.json';
 import { environment as env } from '../environments/environment';
 
 import { NgModule } from '@angular/core';
