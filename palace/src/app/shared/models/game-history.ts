@@ -1,6 +1,6 @@
 export class GameHistory {
     game: string;
     numberOfItems: number;
-    numberofSeconds: number;
+    numberOfSeconds: number;
     result: string;
 }

@@ -12,31 +12,31 @@ export class ProfileStatsComponent implements OnInit {
     {
       game: 'numbers',
       numberOfItems: 4,
-      numberofSeconds: 20,
+      numberOfSeconds: 20,
       result: 'w'
     },
     {
       game: 'numbers',
       numberOfItems: 5,
-      numberofSeconds: 10,
+      numberOfSeconds: 10,
       result: 'w'
     },
     {
       game: 'numbers',
       numberOfItems: 6,
-      numberofSeconds: 10,
+      numberOfSeconds: 10,
       result: 'w'
     },
     {
       game: 'numbers',
       numberOfItems: 10,
-      numberofSeconds: 10,
+      numberOfSeconds: 10,
       result: 'l'
     },
     {
       game: 'letters',
       numberOfItems: 5,
-      numberofSeconds: 10,
+      numberOfSeconds: 10,
       result: 'w'
     },
   ];

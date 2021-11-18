@@ -1,0 +1,44 @@
+[
+	{
+		"game": "numbers",
+		"numberOfItems": 4,
+		"numberOfSeconds": 1,
+		"result": "w"
+	},
+	{
+		"game": "numbers",
+		"numberOfItems": 10,
+		"numberOfSeconds": 10,
+		"result": "w"
+	},
+	{
+		"game": "numbers",
+		"numberOfItems": 14,
+		"numberOfSeconds": 10,
+		"result": "l"
+	},
+	{
+		"game": "letters",
+		"numberOfItems": 5,
+		"numberOfSeconds": 5,
+		"result": "w"
+	},
+	{
+		"game": "letters",
+		"numberOfItems": 8,
+		"numberOfSeconds": 4,
+		"result": "l"
+	},
+	{
+		"game": "numbers",
+		"numberOfItems": 4,
+		"numberOfSeconds": 20,
+		"result": "w"
+	},
+	{
+		"game": "letters",
+		"numberOfItems": 5,
+		"numberOfSeconds": 13,
+		"result": "w"
+	}
+]
