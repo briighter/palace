@@ -20,7 +20,7 @@ allGameHistory.forEach(function (game) {
             "game": game.game,
             "numberOfItems": game.numberOfItems,
             "numberOfSeconds": game.numberOfSeconds,
-            "result": game.result
+            "gameResult": game.gameResult
         }
     };
 
