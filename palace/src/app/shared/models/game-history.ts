@@ -1,4 +1,5 @@
-export class GameHistory {
+export interface GameHistory {
+    gameId: number;
     game: string;
     numberOfItems: number;
     numberOfSeconds: number;

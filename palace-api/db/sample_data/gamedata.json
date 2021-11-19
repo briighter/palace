@@ -1,44 +1,51 @@
 [
 	{
+		"gameId": 1,
 		"game": "numbers",
 		"numberOfItems": 4,
-		"numberOfSeconds": 1,
+		"numberofSeconds": 1,
 		"result": "w"
 	},
 	{
+		"gameId": 2,
 		"game": "numbers",
 		"numberOfItems": 10,
-		"numberOfSeconds": 10,
+		"numberofSeconds": 10,
 		"result": "w"
 	},
 	{
+		"gameId": 3,
 		"game": "numbers",
 		"numberOfItems": 14,
-		"numberOfSeconds": 10,
+		"numberofSeconds": 10,
 		"result": "l"
 	},
 	{
+		"gameId": 4,
 		"game": "letters",
 		"numberOfItems": 5,
-		"numberOfSeconds": 5,
+		"numberofSeconds": 5,
 		"result": "w"
 	},
 	{
+		"gameId": 5,
 		"game": "letters",
 		"numberOfItems": 8,
-		"numberOfSeconds": 4,
+		"numberofSeconds": 4,
 		"result": "l"
 	},
 	{
+		"gameId": 6,
 		"game": "numbers",
 		"numberOfItems": 4,
-		"numberOfSeconds": 20,
+		"numberofSeconds": 20,
 		"result": "w"
 	},
 	{
+		"gameId": 7,
 		"game": "letters",
 		"numberOfItems": 5,
-		"numberOfSeconds": 13,
+		"numberofSeconds": 13,
 		"result": "w"
 	}
 ]
