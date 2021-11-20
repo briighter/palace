@@ -4,48 +4,48 @@
 		"game": "numbers",
 		"numberOfItems": 4,
 		"numberofSeconds": 1,
-		"result": "w"
+		"gameResult": "w"
 	},
 	{
 		"gameId": 2,
 		"game": "numbers",
 		"numberOfItems": 10,
 		"numberofSeconds": 10,
-		"result": "w"
+		"gameResult": "w"
 	},
 	{
 		"gameId": 3,
 		"game": "numbers",
 		"numberOfItems": 14,
 		"numberofSeconds": 10,
-		"result": "l"
+		"gameResult": "l"
 	},
 	{
 		"gameId": 4,
 		"game": "letters",
 		"numberOfItems": 5,
 		"numberofSeconds": 5,
-		"result": "w"
+		"gameResult": "w"
 	},
 	{
 		"gameId": 5,
 		"game": "letters",
 		"numberOfItems": 8,
 		"numberofSeconds": 4,
-		"result": "l"
+		"gameResult": "l"
 	},
 	{
 		"gameId": 6,
 		"game": "numbers",
 		"numberOfItems": 4,
 		"numberofSeconds": 20,
-		"result": "w"
+		"gameResult": "w"
 	},
 	{
 		"gameId": 7,
 		"game": "letters",
 		"numberOfItems": 5,
 		"numberofSeconds": 13,
-		"result": "w"
+		"gameResult": "w"
 	}
 ]
