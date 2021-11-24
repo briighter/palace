@@ -1,7 +1,7 @@
 var async = require('async');
-var BookInstance = require('../bookInstances/bookInstance');
+var GameHistoryInstance = require('../games/gameHistory');
 
-var Book = require('./book');
+var GameHistory = require('./gameHistory');
 var Author = require('../authors/author');
 var Genre = require('../genres/genre');
 
@@ -10,13 +10,13 @@ const { body, validationResult } = require('express-validator');
 exports.index = function (req, res) {
     async.parallel({
         book_count: function (callback) {
-            Book.countDocuments({}, callback); // Pass an empty object as match condition to find all documents of this collection
+            GameHistory.countDocuments({}, callback); // Pass an empty object as match condition to find all documents of this collection
         },
         book_instance_count: function (callback) {
-            BookInstance.countDocuments({}, callback);
+            GameHistoryInstance.countDocuments({}, callback);
         },
         book_instance_available_count: function (callback) {
-            BookInstance.countDocuments({ status: 'Available' }, callback);
+            GameHistoryInstance.countDocuments({ status: 'Available' }, callback);
         },
         author_count: function (callback) {
             Author.countDocuments({}, callback);
@@ -29,14 +29,14 @@ exports.index = function (req, res) {
     })
 };
 
-// Display list of all Books.
+// Display list of all GameHistorys.
 exports.book_list = async function (req, res, next) {
-    await Book.find({}, 'title author')
+    await GameHistory.find({}, 'title author')
         .populate('author')
         .exec(function (err, list_books) {
             if (err) { return next(err); }
             //Successful, so render
-            res.render('book_list', { title: 'Book List', book_list: list_books });
+            res.render('book_list', { title: 'GameHistory List', book_list: list_books });
         });
 };
 
@@ -46,20 +46,20 @@ exports.book_detail = function (req, res, next) {
     async.parallel({
         book: function (callback) {
 
-            Book.findById(req.params.id)
+            GameHistory.findById(req.params.id)
                 .populate('author')
                 .populate('genre')
                 .exec(callback);
         },
         book_instance: function (callback) {
 
-            BookInstance.find({ 'book': req.params.id })
+            GameHistoryInstance.find({ 'book': req.params.id })
                 .exec(callback);
         },
     }, function (err, results) {
         if (err) { return next(err); }
         if (results.book == null) { // No results.
-            var err = new Error('Book not found');
+            var err = new Error('GameHistory not found');
             err.status = 404;
             return next(err);
         }
@@ -82,7 +82,7 @@ exports.book_create_get = async function (req, res, next) {
         },
     }, function (err, results) {
         if (err) { return next(err); }
-        res.render('book_form', { title: 'Create Book', authors: results.authors, genres: results.genres });
+        res.render('book_form', { title: 'Create GameHistory', authors: results.authors, genres: results.genres });
     });
 
 };
@@ -112,8 +112,8 @@ exports.book_create_post = [
         // Extract the validation errors from a request.
         const errors = validationResult(req);
 
-        // Create a Book object with escaped and trimmed data.
-        var book = new Book(
+        // Create a GameHistory object with escaped and trimmed data.
+        var book = new GameHistory(
             {
                 title: req.body.title,
                 author: req.body.author,
@@ -142,7 +142,7 @@ exports.book_create_post = [
                         results.genres[i].checked = 'true';
                     }
                 }
-                res.render('book_form', { title: 'Create Book', authors: results.authors, genres: results.genres, book: book, errors: errors.array() });
+                res.render('book_form', { title: 'Create GameHistory', authors: results.authors, genres: results.genres, book: book, errors: errors.array() });
             });
             return;
         }
@@ -159,12 +159,12 @@ exports.book_create_post = [
 
 // Display book delete form on GET.
 exports.book_delete_get = function (req, res) {
-    res.send('NOT IMPLEMENTED: Book delete GET');
+    res.send('NOT IMPLEMENTED: GameHistory delete GET');
 };
 
 // Handle book delete on POST.
 exports.book_delete_post = function (req, res) {
-    res.send('NOT IMPLEMENTED: Book delete POST');
+    res.send('NOT IMPLEMENTED: GameHistory delete POST');
 };
 
 // Display book update form on GET.
@@ -173,7 +173,7 @@ exports.book_update_get = function (req, res, next) {
     // Get book, authors and genres for form.
     async.parallel({
         book: function (callback) {
-            Book.findById(req.params.id).populate('author').populate('genre').exec(callback);
+            GameHistory.findById(req.params.id).populate('author').populate('genre').exec(callback);
         },
         authors: function (callback) {
             Author.find(callback);
@@ -184,7 +184,7 @@ exports.book_update_get = function (req, res, next) {
     }, function (err, results) {
         if (err) { return next(err); }
         if (results.book == null) { // No results.
-            var err = new Error('Book not found');
+            var err = new Error('GameHistory not found');
             err.status = 404;
             return next(err);
         }
@@ -197,7 +197,7 @@ exports.book_update_get = function (req, res, next) {
                 }
             }
         }
-        res.render('book_form', { title: 'Update Book', authors: results.authors, genres: results.genres, book: results.book });
+        res.render('book_form', { title: 'Update GameHistory', authors: results.authors, genres: results.genres, book: results.book });
     });
 
 };
@@ -229,8 +229,8 @@ exports.book_update_post = [
         // Extract the validation errors from a request.
         const errors = validationResult(req);
 
-        // Create a Book object with escaped/trimmed data and old id.
-        var book = new Book(
+        // Create a GameHistory object with escaped/trimmed data and old id.
+        var book = new GameHistory(
             {
                 title: req.body.title,
                 author: req.body.author,
@@ -260,13 +260,13 @@ exports.book_update_post = [
                         results.genres[i].checked = 'true';
                     }
                 }
-                res.render('book_form', { title: 'Update Book', authors: results.authors, genres: results.genres, book: book, errors: errors.array() });
+                res.render('book_form', { title: 'Update GameHistory', authors: results.authors, genres: results.genres, book: book, errors: errors.array() });
             });
             return;
         }
         else {
             // Data from form is valid. Update the record.
-            Book.findByIdAndUpdate(req.params.id, book, {}, function (err, thebook) {
+            GameHistory.findByIdAndUpdate(req.params.id, book, {}, function (err, thebook) {
                 if (err) { return next(err); }
                 // Successful - redirect to book detail page.
                 res.redirect(thebook.url);
