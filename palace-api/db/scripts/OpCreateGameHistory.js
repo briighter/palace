@@ -19,7 +19,7 @@ var params = {
             "gameId": 100,
             "game": "letters",
             "numberOfItems": 9,
-            "numberofSeconds": 6,
+            "numberOfSeconds": 6,
             "gameResult": "l"
     }
 };

@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.41.0",
+    "async": "^3.2.2",
     "aws-sdk": "^2.1029.0",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
