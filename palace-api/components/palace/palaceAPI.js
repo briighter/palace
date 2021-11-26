@@ -31,6 +31,6 @@ router.get('/gameHistory', gameHistory_controller.index);
 router.get('/gameHistory/:id', gameHistory_controller.gameHistory_detail);
 
 // GET request for list of all gameHistory items.
-// router.get('/gameHistory/all', gameHistory_controller.gameHistory_list);
+router.get('/gameHistory/all', gameHistory_controller.gameHistory_list);
 
 module.exports = router;
