@@ -1,12 +1,14 @@
+var AWS = require("aws-sdk");
 var GameHistory = require('./gameHistory');
 
+var docClient = new AWS.DynamoDB.DocumentClient();
 const table = 'GameHistory';
 
 exports.index = function (req, res) {
-    async.parallel({
-    }, function (err, results) {
-        res.json({ status: 'IT WORKED'});
-    });
+    // async.parallel({
+    // }, function (err, results) {
+    //     res.json({ status: 'IT WORKED'});
+    // });
 };
 
 // Display list of all Books.
@@ -14,14 +16,14 @@ exports.gameHistory_detail = async function (req, res, next) {
     var params = {
         TableName: table,
         Key:{
-            "gameId": req.params.id
+            'gameId': parseInt(req.params.id)
         }
     };
 
     docClient.get(params).promise().then( response => {
-        res.json(response.item);
+        res.json(response);
     }, error => {
-        console.error("Unable to read item. Error JSON:", JSON.stringify(err, null, 2));
+        console.error("Unable to read item. Error JSON:", JSON.stringify(error, null, 2));
     });
     
     // docClient.get(params, function(err, data) {
