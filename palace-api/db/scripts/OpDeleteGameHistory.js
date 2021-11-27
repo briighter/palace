@@ -15,7 +15,7 @@ var table = "GameHistory";
 var params = {
     TableName:table,
     Key: {
-        "gameId": 101
+        "gameId": 100
     },
     // ConditionExpression:"gameId = :val",
     // ExpressionAttributeValues: {

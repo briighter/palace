@@ -27,10 +27,11 @@ router.get('/gameHistory', gameHistory_controller.index);
 // // POST request to update gameHistory.
 // router.post('/gameHistory/:id/update', gameHistory_controller.gameHistory_update_post);
 
+// GET request for list of all gameHistory items.
+router.get('/gameHistory/all', gameHistory_controller.gameHistory_list);
+
 // // GET request for one gameHistory.
 router.get('/gameHistory/:id', gameHistory_controller.gameHistory_detail);
 
-// GET request for list of all gameHistory items.
-router.get('/gameHistory/all', gameHistory_controller.gameHistory_list);
 
 module.exports = router;
