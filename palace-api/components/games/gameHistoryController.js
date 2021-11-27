@@ -22,7 +22,6 @@ exports.gameHistory_list = async function (req, res, next) {
             console.log("Scan succeeded.");
             data.Items.forEach(function (game) {
                 console.log(game);
-                res.json(game);
             });
 
             // continue scanning if we have more games, because
@@ -32,6 +31,8 @@ exports.gameHistory_list = async function (req, res, next) {
                 params.ExclusiveStartKey = data.LastEvaluatedKey;
                 docClient.scan(params, onScan);
             }
+
+            res.json(data.Items);
         }
     });
 };
