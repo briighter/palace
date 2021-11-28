@@ -18,10 +18,11 @@ exports.gameHistory_list = async function (req, res, next) {
         if (err) {
             console.error("Unable to scan the table. Error JSON:", JSON.stringify(err, null, 2));
         } else {
+            var result = []
             // print all the games
             console.log("Scan succeeded.");
             data.Items.forEach(function (game) {
-                console.log(game);
+                result.push(game);
             });
 
             // continue scanning if we have more games, because
@@ -32,7 +33,7 @@ exports.gameHistory_list = async function (req, res, next) {
                 docClient.scan(params, onScan);
             }
 
-            res.json(data.Items);
+            res.json(result);
         }
     });
 };
@@ -59,6 +60,30 @@ exports.gameHistory_detail = async function (req, res, next) {
         } else {
             // console.log("GetItem succeeded:", JSON.stringify(data, null, 2));
             res.json(data.Item);
+        }
+    });
+};
+
+// Handle book create on POST.
+exports.book_create_post = async function (req, res, next) {
+    var params = {
+        TableName: table,
+        Item: {
+            "gameId": 100,
+            "game": req.params.game,
+            "numberOfItems": parseInt(req.params.numberOfItems),
+            "numberOfSeconds": parseInt(req.params.numberOfSeconds),
+            "gameResult": req.params.result
+        }
+    };
+
+    console.log("Adding a new item...");
+    docClient.put(params, function (err, data) {
+        if (err) {
+            console.error("Unable to add item. Error JSON:", JSON.stringify(err, null, 2));
+        } else {
+            // console.log("Added item:", JSON.stringify(data, null, 2));
+            console.log("Added item:", JSON.stringify(params.Item, null, 2));
         }
     });
 };
