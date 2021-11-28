@@ -13,7 +13,7 @@ router.get('/gameHistory', gameHistory_controller.index);
 // router.get('/gameHistory/create', gameHistory_controller.gameHistory_create_get);
 
 // // POST request for creating gameHistory.
-// router.post('/gameHistory/create', gameHistory_controller.gameHistory_create_post);
+router.post('/gameHistory/create', gameHistory_controller.gameHistory_create_post);
 
 // // GET request to delete gameHistory.
 // router.get('/gameHistory/:id/delete', gameHistory_controller.gameHistory_delete_get);
