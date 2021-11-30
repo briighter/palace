@@ -8,7 +8,7 @@ exports.index = async function (req, res, next) {
     res.render('index', { title: 'Express' });
 };
 
-// Display list of all Books.
+// Display list of all Game History.
 exports.gameHistory_list = async function (req, res, next) {
     const params = {
         TableName: table
@@ -38,7 +38,7 @@ exports.gameHistory_list = async function (req, res, next) {
     });
 };
 
-// Display list of all Books.
+// Display details of one Game History.
 exports.gameHistory_detail = async function (req, res, next) {
     const params = {
         TableName: table,
@@ -64,26 +64,27 @@ exports.gameHistory_detail = async function (req, res, next) {
     });
 };
 
-// Handle book create on POST.
-exports.book_create_post = async function (req, res, next) {
-    var params = {
+// Handle Game History create on POST.
+exports.gameHistory_create_post = async function (req, res, next) {
+    const params = {
         TableName: table,
         Item: {
             "gameId": 100,
             "game": req.params.game,
             "numberOfItems": parseInt(req.params.numberOfItems),
             "numberOfSeconds": parseInt(req.params.numberOfSeconds),
-            "gameResult": req.params.result
+            "gameResult": req.params.gameResult
         }
     };
 
     console.log("Adding a new item...");
-    docClient.put(params, function (err, data) {
+    await docClient.put(params, function (err, data) {
         if (err) {
             console.error("Unable to add item. Error JSON:", JSON.stringify(err, null, 2));
         } else {
             // console.log("Added item:", JSON.stringify(data, null, 2));
             console.log("Added item:", JSON.stringify(params.Item, null, 2));
+            console.log(req.params);
         }
     });
 };

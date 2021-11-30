@@ -13,7 +13,7 @@ var table = "GameHistory";
 var params = {
     TableName: table,
     Key:{
-        "gameId": 100
+        "gameId": 2
     }
 };
 

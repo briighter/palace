@@ -16,7 +16,7 @@ var table = "GameHistory";
 var params = {
     TableName:table,
     Item:{
-            "gameId": 100,
+            "gameId": 0,
             "game": "letters",
             "numberOfItems": 9,
             "numberOfSeconds": 6,

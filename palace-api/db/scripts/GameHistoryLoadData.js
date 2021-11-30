@@ -11,7 +11,7 @@ var docClient = new AWS.DynamoDB.DocumentClient();
 
 console.log("Importing game history into DynamoDB. Please wait.");
 
-var allGameHistory = JSON.parse(fs.readFileSync('palace-api/db/sample_data/gamedata.json', 'utf8'));
+var allGameHistory = JSON.parse(fs.readFileSync('../sample_data/gamedata.json', 'utf8'));
 allGameHistory.forEach(function (game) {
     var params = {
         TableName: "GameHistory",
@@ -28,7 +28,7 @@ allGameHistory.forEach(function (game) {
         if (err) {
             console.error("Unable to add game", game.game, ". Error JSON:", JSON.stringify(err, null, 2));
         } else {
-            console.log("PutItem succeeded:", game.game);
+            console.log("PutItem succeeded:", game);
         }
     });
 });
