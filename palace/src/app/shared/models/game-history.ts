@@ -3,5 +3,5 @@ export interface GameHistory {
     game: string;
     numberOfItems: number;
     numberOfSeconds: number;
-    result: string;
+    gameResult: string;
 }

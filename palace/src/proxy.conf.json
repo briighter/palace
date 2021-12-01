@@ -1,0 +1,10 @@
+{
+    "/palace/gameHistory": {
+        "target": "http://localhost:3000",
+        "secure": true,
+        "pathRewrite": {
+            "^/palace/gameHistory": ""
+        },
+        "changeOrigin": true
+    }
+}
