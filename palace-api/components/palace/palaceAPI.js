@@ -12,7 +12,7 @@ router.get('/gameHistory', gameHistory_controller.index);
 // // GET request for creating a gameHistory. NOTE This must come before routes that display gameHistory (uses id).
 // router.get('/gameHistory/create', gameHistory_controller.gameHistory_create_get);
 
-// // POST request for creating gameHistory.
+// POST request for creating gameHistory.
 router.post('/gameHistory/create', gameHistory_controller.gameHistory_create_post);
 
 // // GET request to delete gameHistory.
@@ -30,7 +30,7 @@ router.post('/gameHistory/create', gameHistory_controller.gameHistory_create_pos
 // GET request for list of all gameHistory items.
 router.get('/gameHistory/all', gameHistory_controller.gameHistory_list);
 
-// // GET request for one gameHistory.
+// GET request for one gameHistory.
 router.get('/gameHistory/:id', gameHistory_controller.gameHistory_detail);
 
 

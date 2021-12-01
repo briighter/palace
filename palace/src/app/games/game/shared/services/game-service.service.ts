@@ -8,12 +8,12 @@ import { catchError, retry } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class GameServiceService {
-  endpoint = '';
+  endpoint = '/palace/gameHistory';
 
   constructor(private http: HttpClient) { }
 
-  getGameHistory() {
-    return this.http.get<GameHistory>(this.endpoint);
+  getAllGameHistory() {
+    return this.http.get<GameHistory>(this.endpoint + '/all');
   }
 
   postGameHistory(data) {
