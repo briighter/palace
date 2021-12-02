@@ -1,5 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { GameServiceService } from '../shared/services/game-service.service';
 import { GameSettingsService } from '../shared/services/game-settings.service';
 
 interface Settings {
@@ -25,7 +26,6 @@ export class NumbersComponent implements OnInit, OnDestroy {
   resultIsDisplayed = false;
   settingsIsDisplayed = false;
 
-  answers = []; // Refactor to database
   gameResult: boolean;
 
   // Initialize settings
@@ -39,7 +39,7 @@ export class NumbersComponent implements OnInit, OnDestroy {
 
   settingsSubscription: Subscription;
 
-  constructor(private settingService: GameSettingsService) {
+  constructor(private settingService: GameSettingsService, private gameService: GameServiceService) {
     this.settingsSubscription = settingService.settings$.subscribe(
       settings => {
         this.settings = settings;
@@ -75,14 +75,14 @@ export class NumbersComponent implements OnInit, OnDestroy {
 
   generateNumbers(size: number) {
     let num;
-    for(let i = 1; i <= size; i++) {
+    for (let i = 1; i <= size; i++) {
       num = Math.floor(Math.random() * (this.max - this.min) + this.min);
       this.numbers = this.numbers.concat(num);
     }
   }
 
   hideNumbers() {
-    setTimeout(function() {
+    setTimeout(function () {
       this.subjectIsDisplayed = false;
     }.bind(this), this.timeMilli);
 
@@ -103,13 +103,12 @@ export class NumbersComponent implements OnInit, OnDestroy {
   }
 
   submitUserAnswer(ans: string) {
-    this.answers.push(ans);
     this.gameResult = this.checkUserAnswer(ans);
     this.inputIsDisplayed = false;
     this.resultIsDisplayed = true;
   }
 
-  toggleSettings(isDisplayed: boolean){
+  toggleSettings(isDisplayed: boolean) {
     this.settingsIsDisplayed = isDisplayed;
   }
 
@@ -125,5 +124,9 @@ export class NumbersComponent implements OnInit, OnDestroy {
     const timeMilliseconds = minToMilli + secToMilli;
 
     this.timeMilli = timeMilliseconds;
+  }
+  
+  submitGameData(data) {
+    this.gameService.postGameHistory(data);
   }
 }
