@@ -19,8 +19,6 @@ export class ProfileStatsComponent implements OnInit {
 
   showGameData() {
     this.gameService.getAllGameHistory()
-      .subscribe(data => this.gameStats = data,
-        (err) => { console.log(err); },
-        () => console.log(this.gameStats));
+      .subscribe(data => this.gameStats = data);
   }
 }
