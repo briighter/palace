@@ -1,5 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { GameHistory } from 'src/app/shared/models/game-history';
 import { GameServiceService } from '../shared/services/game-service.service';
 import { GameSettingsService } from '../shared/services/game-settings.service';
 
@@ -38,6 +39,9 @@ export class NumbersComponent implements OnInit, OnDestroy {
   timeMilli = this.settings.timeSeconds * 1000;
 
   settingsSubscription: Subscription;
+
+  gameHistory: GameHistory;
+  timeSeconds: number;
 
   constructor(private settingService: GameSettingsService, private gameService: GameServiceService) {
     this.settingsSubscription = settingService.settings$.subscribe(
@@ -82,7 +86,7 @@ export class NumbersComponent implements OnInit, OnDestroy {
   }
 
   hideNumbers() {
-    setTimeout(function () {
+    setTimeout(function() {
       this.subjectIsDisplayed = false;
     }.bind(this), this.timeMilli);
 
@@ -114,6 +118,7 @@ export class NumbersComponent implements OnInit, OnDestroy {
 
   updateSettings() {
     this.convertTimeToMili(this.settings.timeMinutes, this.settings.timeSeconds);
+    this.convertTimeToSeconds(this.settings.timeMinutes, this.settings.timeSeconds);
     this.toggleSettings(true);
   }
 
@@ -125,8 +130,17 @@ export class NumbersComponent implements OnInit, OnDestroy {
 
     this.timeMilli = timeMilliseconds;
   }
-  
-  submitGameData(data) {
-    this.gameService.postGameHistory(data);
+
+  convertTimeToSeconds(minutes: number, seconds: number) {
+    this.timeSeconds = (minutes * 60) + seconds;
+  }
+
+  submitGameData() {
+    this.gameHistory.game = this.game;
+    this.gameHistory.gameResult = this.gameResult.toString();
+    this.gameHistory.numberOfItems = this.settings.length;
+    this.gameHistory.numberOfSeconds = this.timeSeconds;
+
+    this.gameService.postGameHistory(this.gameHistory);
   }
 }
