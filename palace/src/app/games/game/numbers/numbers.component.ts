@@ -108,6 +108,7 @@ export class NumbersComponent implements OnInit, OnDestroy {
 
   submitUserAnswer(ans: string) {
     this.gameResult = this.checkUserAnswer(ans);
+    this.submitGameData();
     this.inputIsDisplayed = false;
     this.resultIsDisplayed = true;
   }
@@ -136,10 +137,12 @@ export class NumbersComponent implements OnInit, OnDestroy {
   }
 
   submitGameData() {
-    this.gameHistory.game = this.game;
-    this.gameHistory.gameResult = this.gameResult.toString();
-    this.gameHistory.numberOfItems = this.settings.length;
-    this.gameHistory.numberOfSeconds = this.timeSeconds;
+    this.gameHistory = {
+      game: this.game,
+      gameResult: this.gameResult.toString(),
+      numberOfItems: this.settings.length,
+      numberOfSeconds: this.timeSeconds
+    }
 
     this.gameService.postGameHistory(this.gameHistory);
   }

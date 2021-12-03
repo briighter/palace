@@ -1,5 +1,5 @@
 export interface GameHistory {
-    gameId: number;
+    gameId?: number;
     game: string;
     numberOfItems: number;
     numberOfSeconds: number;
