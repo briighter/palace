@@ -16,12 +16,20 @@ export class GameServiceService {
     return this.http.get<GameHistory[]>(this.endpoint + '/all');
   }
 
-  postGameHistory(data: GameHistory) {
-    console.log('Posting game data...');
+  // postGameHistory(data: GameHistory) {
+  //   console.log('Posting game data...');
+  //   console.log(data);
+  //   this.http.post<GameHistory>(this.endpoint + '/create', data);
+  // }
+  postGameHistory(data: GameHistory): Observable<GameHistory> {
+    console.log('Post game data...');
     console.log(data);
-    this.http.post<GameHistory>(this.endpoint + '/create', data);
-  }
 
+    return this.http.post<GameHistory>(this.endpoint + '/create', data)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
   private handleError(error: HttpErrorResponse) {
     if (error.status === 0) {
       // A client-side or network error occurred. Handle it accordingly.
