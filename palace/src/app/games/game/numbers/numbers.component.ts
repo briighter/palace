@@ -27,7 +27,7 @@ export class NumbersComponent implements OnInit, OnDestroy {
   resultIsDisplayed = false;
   settingsIsDisplayed = false;
 
-  gameResult: boolean;
+  gameResult: string;
 
   // Initialize settings
   settings: Settings = {
@@ -52,7 +52,8 @@ export class NumbersComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-
+    this.convertTimeToMili(this.settings.timeMinutes, this.settings.timeSeconds);
+    this.convertTimeToSeconds(this.settings.timeMinutes, this.settings.timeSeconds);
   }
 
   ionViewDidLeave() {
@@ -101,9 +102,9 @@ export class NumbersComponent implements OnInit, OnDestroy {
 
   checkUserAnswer(ans: string) {
     if (this.numbers === ans) {
-      return true;
+      return 'w';
     }
-    return false;
+    return 'l';
   }
 
   submitUserAnswer(ans: string) {
@@ -138,11 +139,13 @@ export class NumbersComponent implements OnInit, OnDestroy {
 
   submitGameData() {
     this.gameHistory = {
+      gameId: 100,
       game: this.game,
       gameResult: this.gameResult.toString(),
       numberOfItems: this.settings.length,
       numberOfSeconds: this.timeSeconds
-    }
+    };
+    console.log('Built game data...');
 
     this.gameService.postGameHistory(this.gameHistory);
   }

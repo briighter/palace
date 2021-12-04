@@ -69,7 +69,7 @@ exports.gameHistory_create_post = async function (req, res, next) {
     const params = {
         TableName: table,
         Item: {
-            "gameId": 100,
+            "gameId": req.params.gameId,
             "game": req.params.game,
             "numberOfItems": parseInt(req.params.numberOfItems),
             "numberOfSeconds": parseInt(req.params.numberOfSeconds),
