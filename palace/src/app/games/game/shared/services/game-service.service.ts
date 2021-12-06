@@ -1,4 +1,5 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { GameHistory } from 'src/app/shared/models/game-history';
 import { Observable, throwError } from 'rxjs';
@@ -10,6 +11,12 @@ import { catchError, retry } from 'rxjs/operators';
 export class GameServiceService {
   endpoint = 'http://localhost:3000/palace/gameHistory';
 
+  httpOptions = {
+    headers: new HttpHeaders({
+      // eslint-disable-next-line @typescript-eslint/naming-convention
+      'Content-Type': 'application/json'
+    })
+  };
   constructor(private http: HttpClient) { }
 
   getAllGameHistory() {
@@ -21,11 +28,11 @@ export class GameServiceService {
   //   console.log(data);
   //   this.http.post<GameHistory>(this.endpoint + '/create', data);
   // }
-  postGameHistory(data: GameHistory): Observable<GameHistory> {
+  postGameHistory(gameData: GameHistory): Observable<GameHistory> {
     console.log('Post game data...');
-    console.log(data);
+    console.log(JSON.stringify(gameData));
 
-    return this.http.post<GameHistory>(this.endpoint + '/create', data)
+    return this.http.post<GameHistory>(this.endpoint + '/create', JSON.stringify(gameData), this.httpOptions)
       .pipe(
         catchError(this.handleError)
       );
