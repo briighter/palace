@@ -139,7 +139,6 @@ export class NumbersComponent implements OnInit, OnDestroy {
 
   submitGameData() {
     this.gameHistory = {
-      gameId: 104,
       game: this.game,
       numberOfItems: this.settings.length,
       numberOfSeconds: this.timeSeconds,

@@ -4,69 +4,54 @@
 		"game": "numbers",
 		"numberOfItems": 4,
 		"numberOfSeconds": 1,
-		"gameResult": "w"
+		"gameResult": "w",
+		"user": {
+			"username": "user12345",
+			"email": "limaeight@gmail.com"
+		}
 	},
 	{
 		"gameId": 2,
 		"game": "numbers",
 		"numberOfItems": 10,
 		"numberOfSeconds": 10,
-		"gameResult": "w"
+		"gameResult": "w",
+		"user": {
+			"username": "user12345",
+			"email": "limaeight@gmail.com"
+		}
 	},
 	{
 		"gameId": 3,
 		"game": "numbers",
 		"numberOfItems": 14,
 		"numberOfSeconds": 10,
-		"gameResult": "l"
+		"gameResult": "l",
+		"user": {
+			"username": "user12345",
+			"email": "limaeight@gmail.com"
+		}
 	},
 	{
 		"gameId": 4,
 		"game": "letters",
 		"numberOfItems": 5,
 		"numberOfSeconds": 5,
-		"gameResult": "w"
+		"gameResult": "w",
+		"user": {
+			"username": "user12345",
+			"email": "limaeight@gmail.com"
+		}
 	},
 	{
 		"gameId": 5,
 		"game": "letters",
 		"numberOfItems": 8,
 		"numberOfSeconds": 4,
-		"gameResult": "l"
-	},
-	{
-		"gameId": 6,
-		"game": "numbers",
-		"numberOfItems": 4,
-		"numberOfSeconds": 20,
-		"gameResult": "w"
-	},
-	{
-		"gameId": 7,
-		"game": "letters",
-		"numberOfItems": 5,
-		"numberOfSeconds": 13,
-		"gameResult": "w"
-	},
-	{
-		"gameId": 8,
-		"game": "letters",
-		"numberOfItems": 13,
-		"numberOfSeconds": 13,
-		"gameResult": "w"
-	},
-	{
-		"gameId": 9,
-		"game": "letters",
-		"numberOfItems": 30,
-		"numberOfSeconds": 30,
-		"gameResult": "l"
-	},
-	{
-		"gameId": 10,
-		"game": "letters",
-		"numberOfItems": 30,
-		"numberOfSeconds": 30,
-		"gameResult": "w"
+		"gameResult": "l",
+		"user": {
+			"username": "user12345",
+			"email": "limaeight@gmail.com"
+		}
 	}
 ]

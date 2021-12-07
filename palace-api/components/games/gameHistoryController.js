@@ -69,20 +69,23 @@ exports.gameHistory_create_post = async function (req, res, next) {
     const params = {
         TableName: table,
         Item: {
-            "gameId": req.body.gameId,
+            "gameId": 0,
             "game": req.body.game,
             "numberOfItems": parseInt(req.body.numberOfItems),
             "numberOfSeconds": parseInt(req.body.numberOfSeconds),
             "gameResult": req.body.gameResult
+        },
+        UpdateExpression: "SET gameId = gameId + :val",
+        ExpressionAttributeValues:{
+            ":val": 1
         }
     };
 
     console.log("Adding a new item...");
     await docClient.put(params, function (err, data) {
-        if (err) {
+        if (err) { 
             console.error("Unable to add item. Error JSON:", JSON.stringify(err, null, 2));
         } else {
-            // console.log("Added item:", JSON.stringify(data, null, 2));
             console.log("Added item:", JSON.stringify(params.Item, null, 2));
         }
     });

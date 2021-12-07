@@ -16,10 +16,10 @@ var dynamodb = new AWS.DynamoDB();
 var params = {
     TableName: "GameHistory",
     KeySchema: [
-        { AttributeName: "gameId", KeyType: "HASH" }  //Partition key
+        { AttributeName: "id", KeyType: "HASH" }  //Partition key
     ],
     AttributeDefinitions: [
-        { AttributeName: "gameId", AttributeType: "N" }
+        { AttributeName: "id", AttributeType: "N" }
     ],
     ProvisionedThroughput: {
         ReadCapacityUnits: 10,

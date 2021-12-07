@@ -1,5 +1,6 @@
 
 var AWS = require("aws-sdk");
+const { randomUUID } = require("crypto");
 var fs = require('fs');
 
 AWS.config.update({
@@ -12,15 +13,21 @@ var docClient = new AWS.DynamoDB.DocumentClient();
 console.log("Importing game history into DynamoDB. Please wait.");
 
 var allGameHistory = JSON.parse(fs.readFileSync('../sample_data/gamedata.json', 'utf8'));
-allGameHistory.forEach(function (game) {
+allGameHistory.forEach(function (data) {
+    let uuid = self.crypto.randomUUID();
+
     var params = {
         TableName: "GameHistory",
         Item: {
-            "gameId": game.gameId,
-            "game": game.game,
-            "numberOfItems": game.numberOfItems,
-            "numberOfSeconds": game.numberOfSeconds,
-            "gameResult": game.gameResult
+            "gameId": data.gameId,
+            "game": data.game,
+            "numberOfItems": data.numberOfItems,
+            "numberOfSeconds": data.numberOfSeconds,
+            "gameResult": data.gameResult,
+            "user": {
+                "username": data.user.username,
+                "email": data.user.email    
+            }
         }
     };
 

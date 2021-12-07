@@ -11,31 +11,26 @@ import { catchError, retry } from 'rxjs/operators';
 export class GameServiceService {
   endpoint = 'http://localhost:3000/palace/gameHistory';
 
-  httpOptions = {
-    headers: new HttpHeaders({
-      // eslint-disable-next-line @typescript-eslint/naming-convention
-      'Content-Type': 'application/json'
-    })
-  };
   constructor(private http: HttpClient) { }
 
   getAllGameHistory() {
     return this.http.get<GameHistory[]>(this.endpoint + '/all');
   }
 
-  // postGameHistory(data: GameHistory) {
-  //   console.log('Posting game data...');
-  //   console.log(data);
-  //   this.http.post<GameHistory>(this.endpoint + '/create', data);
-  // }
-  postGameHistory(gameData: GameHistory): Observable<GameHistory> {
+  postGameHistory(gameData: GameHistory) {
     console.log('Post game data...');
     console.log(gameData);
 
-    return this.http.post<GameHistory>(this.endpoint + '/create', gameData, this.httpOptions)
-      .pipe(
-        catchError(this.handleError)
-      );
+    this.http.post<GameHistory>(this.endpoint + '/create', gameData)
+      .subscribe(
+        data => {
+          console.log('POST has been initiated for game data', data);
+        },
+        () => this.handleError,
+        () => {
+          console.log('POST has been finished');
+        })
+      .unsubscribe();
   }
 
   private handleError(error: HttpErrorResponse) {
