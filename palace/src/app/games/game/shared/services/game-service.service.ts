@@ -30,13 +30,14 @@ export class GameServiceService {
   // }
   postGameHistory(gameData: GameHistory): Observable<GameHistory> {
     console.log('Post game data...');
-    console.log(JSON.stringify(gameData));
+    console.log(gameData);
 
-    return this.http.post<GameHistory>(this.endpoint + '/create', JSON.stringify(gameData), this.httpOptions)
+    return this.http.post<GameHistory>(this.endpoint + '/create', gameData, this.httpOptions)
       .pipe(
         catchError(this.handleError)
       );
   }
+
   private handleError(error: HttpErrorResponse) {
     if (error.status === 0) {
       // A client-side or network error occurred. Handle it accordingly.

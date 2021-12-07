@@ -66,8 +66,6 @@ exports.gameHistory_detail = async function (req, res, next) {
 
 // Handle Game History create on POST.
 exports.gameHistory_create_post = async function (req, res, next) {
-    console.log("Reached controller...");
-
     const params = {
         TableName: table,
         Item: {
@@ -86,7 +84,6 @@ exports.gameHistory_create_post = async function (req, res, next) {
         } else {
             // console.log("Added item:", JSON.stringify(data, null, 2));
             console.log("Added item:", JSON.stringify(params.Item, null, 2));
-            console.log(req.params);
         }
     });
 };
