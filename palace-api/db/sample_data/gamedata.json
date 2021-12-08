@@ -1,6 +1,7 @@
 [
 	{
-		"gameId": 1,
+		"id": "10181348-8fca-4eec-b1ee-e144c3804ad3",
+		"gameNumber": 1,
 		"game": "numbers",
 		"numberOfItems": 4,
 		"numberOfSeconds": 1,
@@ -11,7 +12,8 @@
 		}
 	},
 	{
-		"gameId": 2,
+		"id": "1b929647-c2f6-4216-b249-65dee4b21c14",
+		"gameNumber": 2,
 		"game": "numbers",
 		"numberOfItems": 10,
 		"numberOfSeconds": 10,
@@ -22,7 +24,8 @@
 		}
 	},
 	{
-		"gameId": 3,
+		"id": "4a07dce9-5365-46de-98ff-69460fa24ae7",
+		"gameNumber": 3,
 		"game": "numbers",
 		"numberOfItems": 14,
 		"numberOfSeconds": 10,
@@ -33,7 +36,8 @@
 		}
 	},
 	{
-		"gameId": 4,
+		"id": "4b920991-8004-4832-8cbd-02b0656e1651",
+		"gameNumber": 4,
 		"game": "letters",
 		"numberOfItems": 5,
 		"numberOfSeconds": 5,
@@ -44,7 +48,8 @@
 		}
 	},
 	{
-		"gameId": 5,
+		"id": "9828db23-fce2-4275-b92a-0fd702518e56",
+		"gameNumber": 5,
 		"game": "letters",
 		"numberOfItems": 8,
 		"numberOfSeconds": 4,

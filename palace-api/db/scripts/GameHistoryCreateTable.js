@@ -19,7 +19,7 @@ var params = {
         { AttributeName: "id", KeyType: "HASH" }  //Partition key
     ],
     AttributeDefinitions: [
-        { AttributeName: "id", AttributeType: "N" }
+        { AttributeName: "id", AttributeType: "S" }
     ],
     ProvisionedThroughput: {
         ReadCapacityUnits: 10,

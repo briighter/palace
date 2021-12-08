@@ -30,6 +30,9 @@ router.post('/gameHistory/create', gameHistory_controller.gameHistory_create_pos
 // GET request for list of all gameHistory items.
 router.get('/gameHistory/all', gameHistory_controller.gameHistory_list);
 
+// GET request for list of all gameHistory items.
+router.get('/gameHistory/all/user', gameHistory_controller.gameHistory_user_list);
+
 // GET request for one gameHistory.
 router.get('/gameHistory/:id', gameHistory_controller.gameHistory_detail);
 
