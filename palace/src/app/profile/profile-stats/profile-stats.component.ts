@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { AuthService } from '@auth0/auth0-angular';
+
 import { GameServiceService } from 'src/app/games/game/shared/services/game-service.service';
 import { GameHistory } from 'src/app/shared/models/game-history';
 
@@ -10,15 +12,16 @@ import { GameHistory } from 'src/app/shared/models/game-history';
 })
 export class ProfileStatsComponent implements OnInit {
   gameStats: GameHistory[];
+  userEmail: string;
 
-  constructor(private gameService: GameServiceService) { }
+  constructor(public auth: AuthService, private gameService: GameServiceService) { }
 
   ngOnInit() {
-    this.showGameData();
+    this.auth.user$.subscribe((data) => this.userEmail = data.email);
   }
 
   showGameData() {
-    this.gameService.getAllGameHistory()
+    this.gameService.getAllGameHistoryForUser(this.userEmail)
       .subscribe(data => this.gameStats = data);
   }
 }

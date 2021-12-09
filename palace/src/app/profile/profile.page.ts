@@ -7,14 +7,10 @@ import { AuthService } from '@auth0/auth0-angular';
   styleUrls: ['./profile.page.scss'],
 })
 export class ProfilePage implements OnInit {
-  profileJson: string = null;
 
-  constructor(public auth: AuthService) {}
+  constructor() {}
 
   ngOnInit(): void {
-    this.auth.user$.subscribe(
-      (profile) => (this.profileJson = JSON.stringify(profile, null, 2)),
-    );
   }
 
 }

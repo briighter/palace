@@ -40,11 +40,20 @@ exports.gameHistory_list = async function (req, res, next) {
 
 // Display list of all Game History for a particular user.
 exports.gameHistory_user_list = async function (req, res, next) {
+    console.log("Querying for all games for a given user.");
+
     const params = {
-        TableName: table
+        TableName: table,
+        KeyConditionExpression: "#user = :u",
+        ExpressionAttributeNames: {
+            "#user": "user.email"
+        },
+        ExpressionAttributeValues: {
+            ":user": req.body.user.email
+        }
     };
 
-    await docClient.scan(params, function onScan(err, data) {
+    await docClient.query(params, function onScan(err, data) {
         if (err) {
             console.error("Unable to scan the table. Error JSON:", JSON.stringify(err, null, 2));
         } else {
@@ -114,7 +123,7 @@ exports.gameHistory_create_post = async function (req, res, next) {
 
     console.log("Adding a new item...");
     await docClient.put(params, function (err, data) {
-        if (err) { 
+        if (err) {
             console.error("Unable to add item. Error JSON:", JSON.stringify(err, null, 2));
         } else {
             console.log("Added item:", JSON.stringify(params.Item, null, 2));
