@@ -17,11 +17,14 @@ export class ProfileStatsComponent implements OnInit {
   constructor(public auth: AuthService, private gameService: GameServiceService) { }
 
   ngOnInit() {
-    this.auth.user$.subscribe((data) => this.userEmail = data.email);
+    this.auth.user$.subscribe(data => {
+      this.userEmail = data.email;
+      this.showGameData(this.userEmail);     
+    });
   }
 
-  showGameData() {
-    this.gameService.getAllGameHistoryForUser(this.userEmail)
+  showGameData(userInfo: string) {
+    this.gameService.getAllGameHistoryForUser(userInfo)
       .subscribe(data => this.gameStats = data);
   }
 }

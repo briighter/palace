@@ -17,9 +17,9 @@ export class GameServiceService {
     return this.http.get<GameHistory[]>(this.endpoint + '/all');
   }
 
-  getAllGameHistoryForUser(userInfo) {
+  getAllGameHistoryForUser(userInfo: string) {
     return this.http.get<GameHistory[]>(this.endpoint + '/all/user', {
-      params: {email: userInfo.userEmail}
+      params: {"email": userInfo}
     });
   }
 
