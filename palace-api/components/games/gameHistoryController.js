@@ -44,12 +44,13 @@ exports.gameHistory_user_list = async function (req, res, next) {
 
     const params = {
         TableName: table,
-        KeyConditionExpression: "#user = :u",
-        ExpressionAttributeNames: {
-            "#user": "user.email"
+        ProjectionExpression:"gameNumber, game, numberOfItems, numberOfSeconds, gameResult",
+        KeyConditionExpression: "#UE = :useremail",
+        ExpressionAttributeNames:{
+            "#UE": "user.email"
         },
         ExpressionAttributeValues: {
-            ":user": req.body.user.email
+            ":useremail": {"S": req.params.email}
         }
     };
 
