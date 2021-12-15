@@ -44,13 +44,13 @@ exports.gameHistory_user_list = async function (req, res, next) {
 
     const params = {
         TableName: table,
-        ProjectionExpression:"id, gameNumber, game, numberOfItems, numberOfSeconds, gameResult",
+        ProjectionExpression: "gameNumber, game, numberOfItems, numberOfSeconds, gameResult",
         FilterExpression: "#UE = :useremail",
-        ExpressionAttributeNames:{
+        ExpressionAttributeNames: {
             "#UE": "user.email"
         },
         ExpressionAttributeValues: {
-            ":useremail": {"S": req.params.email}
+            ":useremail": req.params.email
         }
     };
 
