@@ -11,7 +11,7 @@ var docClient = new AWS.DynamoDB.DocumentClient();
 
 console.log("Importing game history into DynamoDB. Please wait.");
 
-var allGameHistory = JSON.parse(fs.readFileSync('../sample_data/gamedata.json', 'utf8'));
+var allGameHistory = JSON.parse(fs.readFileSync('../sample_data/gamedata2.json', 'utf8'));
 allGameHistory.forEach(function (data) {
 
     var params = {
