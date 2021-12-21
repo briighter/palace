@@ -19,7 +19,7 @@ export class ProfileStatsComponent implements OnInit {
   ngOnInit() {
     this.auth.user$.subscribe(data => {
       this.userEmail = data.email;
-      this.showGameData(this.userEmail);     
+      this.showGameData(this.userEmail);
     });
   }
 

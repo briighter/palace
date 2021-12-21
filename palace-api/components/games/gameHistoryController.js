@@ -44,7 +44,6 @@ exports.gameHistory_user_list = async function (req, res, next) {
 
     const params = {
         TableName: table,
-        // ProjectionExpression: "gameNumber, game, numberOfItems, numberOfSeconds, gameResult",
         FilterExpression: "#U.email = :useremail",
         ExpressionAttributeNames: {
             "#U": "user"
@@ -52,10 +51,6 @@ exports.gameHistory_user_list = async function (req, res, next) {
         ExpressionAttributeValues: {
             ":useremail": req.query.email,
         }
-        // FilterExpression: "gameNumber >= :num",
-        // ExpressionAttributeValues: {
-        //     ":num": 5,
-        // }
     };
 
     await docClient.scan(params, function onScan(err, data) {

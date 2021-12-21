@@ -1,4 +1,4 @@
-import { User } from "./user";
+import { User } from './user';
 
 export interface GameHistory {
     gameId?: number;
@@ -7,5 +7,5 @@ export interface GameHistory {
     numberOfItems: number;
     numberOfSeconds: number;
     gameResult: string;
-    user?: User;
+    user: User;
 }

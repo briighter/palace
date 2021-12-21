@@ -3,6 +3,7 @@ import { Subscription } from 'rxjs';
 import { GameHistory } from 'src/app/shared/models/game-history';
 import { GameServiceService } from '../shared/services/game-service.service';
 import { GameSettingsService } from '../shared/services/game-settings.service';
+import { AuthService } from '@auth0/auth0-angular';
 
 interface Settings {
   length: number;
@@ -42,8 +43,13 @@ export class NumbersComponent implements OnInit, OnDestroy {
 
   gameHistory: GameHistory;
   timeSeconds: number;
+  userInfo: any;
 
-  constructor(private settingService: GameSettingsService, private gameService: GameServiceService) {
+  constructor(
+    private settingService: GameSettingsService,
+    private gameService: GameServiceService,
+    public auth: AuthService
+    ) {
     this.settingsSubscription = settingService.settings$.subscribe(
       settings => {
         this.settings = settings;
@@ -52,6 +58,9 @@ export class NumbersComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    this.auth.user$.subscribe(data => {
+      this.userInfo = data;
+    });
     this.convertTimeToMili(this.settings.timeMinutes, this.settings.timeSeconds);
     this.convertTimeToSeconds(this.settings.timeMinutes, this.settings.timeSeconds);
   }
@@ -140,9 +149,14 @@ export class NumbersComponent implements OnInit, OnDestroy {
   submitGameData() {
     this.gameHistory = {
       game: this.game,
+      // Include game mode as `gameMode` for progressive or static modes
       numberOfItems: this.settings.length,
       numberOfSeconds: this.timeSeconds,
-      gameResult: this.gameResult.toString()
+      gameResult: this.gameResult.toString(),
+      user: {
+        email: this.userInfo.email,
+        username: this.userInfo.nickname
+      }
     };
     console.log('Built game data...');
     console.log(this.gameHistory);
