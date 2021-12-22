@@ -153,10 +153,7 @@ export class NumbersComponent implements OnInit, OnDestroy {
       numberOfItems: this.settings.length,
       numberOfSeconds: this.timeSeconds,
       gameResult: this.gameResult.toString(),
-      user: {
-        email: this.userInfo.email,
-        username: this.userInfo.nickname
-      }
+      user: this.userInfo
     };
     console.log('Built game data...');
     console.log(this.gameHistory);

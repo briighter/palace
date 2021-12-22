@@ -7,5 +7,5 @@ export interface GameHistory {
     numberOfItems: number;
     numberOfSeconds: number;
     gameResult: string;
-    user: User;
+    user?: User;
 }
