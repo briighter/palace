@@ -49,7 +49,7 @@ export class NumbersComponent implements OnInit, OnDestroy {
     private settingService: GameSettingsService,
     private gameService: GameServiceService,
     public auth: AuthService
-    ) {
+  ) {
     this.settingsSubscription = settingService.settings$.subscribe(
       settings => {
         this.settings = settings;
@@ -96,7 +96,7 @@ export class NumbersComponent implements OnInit, OnDestroy {
   }
 
   hideNumbers() {
-    setTimeout(function() {
+    setTimeout(function () {
       this.subjectIsDisplayed = false;
     }.bind(this), this.timeMilli);
 
@@ -153,8 +153,12 @@ export class NumbersComponent implements OnInit, OnDestroy {
       numberOfItems: this.settings.length,
       numberOfSeconds: this.timeSeconds,
       gameResult: this.gameResult.toString(),
-      user: this.userInfo
+      ...(this.userInfo ? { user: { email: this.userInfo.email, username: this.userInfo.nickname } }
+        : { user: { email: undefined, username: undefined } }) // ...(someCondition ? {b: 5}:else)
     };
+    if (this.userInfo) {
+      this.gameHistory.user.username = this.userInfo.nickname;
+    }
     console.log('Built game data...');
     console.log(this.gameHistory);
     this.gameService.postGameHistory(this.gameHistory);
