@@ -60,6 +60,7 @@ export class NumbersComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.auth.user$.subscribe(data => {
       this.userInfo = data;
+      console.log(this.userInfo);
     });
     this.convertTimeToMili(this.settings.timeMinutes, this.settings.timeSeconds);
     this.convertTimeToSeconds(this.settings.timeMinutes, this.settings.timeSeconds);
@@ -153,8 +154,9 @@ export class NumbersComponent implements OnInit, OnDestroy {
       numberOfItems: this.settings.length,
       numberOfSeconds: this.timeSeconds,
       gameResult: this.gameResult.toString(),
-      ...(this.userInfo ? { user: { email: this.userInfo.email, username: this.userInfo.nickname } }
-        : { user: { email: undefined, username: undefined } }) // ...(someCondition ? {b: 5}:else)
+      user: (this.userInfo ? {email: this.userInfo.email, username: this.userInfo.nickname} : {email: '', username: ''})
+      // ...(this.userInfo ? { user: { email: this.userInfo.email, username: this.userInfo.nickname } }
+      //   : { user: { email: undefined, username: undefined } }) // ...(someCondition ? {b: 5}:else)
     };
     if (this.userInfo) {
       this.gameHistory.user.username = this.userInfo.nickname;
