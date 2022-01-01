@@ -1,5 +1,6 @@
 var async = require('async');
 var AWS = require("aws-sdk");
+import { v4 as uuidv4 } from 'uuid';
 
 var docClient = new AWS.DynamoDB.DocumentClient();
 const table = 'GameHistory';
@@ -108,10 +109,10 @@ exports.gameHistory_create_post = async function (req, res, next) {
     const params = {
         TableName: table,
         Item: {
-            "id": req.body.id,
+            "id": uuidv4(),
             "gameNumber": req.body.gameNumber,
             "game": req.body.game,
-             "numberOfItems": parseInt(req.body.numberOfItems),
+            "numberOfItems": parseInt(req.body.numberOfItems),
             "numberOfSeconds": parseInt(req.body.numberOfSeconds),
             "gameResult": req.body.gameResult,
             "user": {

@@ -60,7 +60,6 @@ export class NumbersComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.auth.user$.subscribe(data => {
       this.userInfo = data;
-      console.log(this.userInfo);
     });
     this.convertTimeToMili(this.settings.timeMinutes, this.settings.timeSeconds);
     this.convertTimeToSeconds(this.settings.timeMinutes, this.settings.timeSeconds);
