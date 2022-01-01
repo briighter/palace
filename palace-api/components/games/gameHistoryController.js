@@ -111,7 +111,7 @@ exports.gameHistory_create_post = async function (req, res, next) {
             "id": req.body.id,
             "gameNumber": req.body.gameNumber,
             "game": req.body.game,
-            "numberOfItems": parseInt(req.body.numberOfItems),
+             "numberOfItems": parseInt(req.body.numberOfItems),
             "numberOfSeconds": parseInt(req.body.numberOfSeconds),
             "gameResult": req.body.gameResult,
             "user": {
@@ -122,6 +122,8 @@ exports.gameHistory_create_post = async function (req, res, next) {
     };
 
     console.log("Adding a new item...");
+    console.log(req.body.user.username);
+    console.log(req.body.user.email);
     await docClient.put(params, function (err, data) {
         if (err) {
             console.error("Unable to add item. Error JSON:", JSON.stringify(err, null, 2));
