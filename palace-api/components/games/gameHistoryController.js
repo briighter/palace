@@ -1,6 +1,6 @@
 var async = require('async');
 var AWS = require("aws-sdk");
-import { v4 as uuidv4 } from 'uuid';
+const { v4: uuidv4 } = require('uuid');
 
 var docClient = new AWS.DynamoDB.DocumentClient();
 const table = 'GameHistory';
@@ -123,9 +123,7 @@ exports.gameHistory_create_post = async function (req, res, next) {
     };
 
     console.log("Adding a new item...");
-    console.log(req.body.user.username);
-    console.log(req.body.user.email);
-    await docClient.put(params, function (err, data) {
+    await docClient.update(params, function (err, data) {
         if (err) {
             console.error("Unable to add item. Error JSON:", JSON.stringify(err, null, 2));
         } else {
