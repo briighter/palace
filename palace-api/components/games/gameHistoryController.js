@@ -108,9 +108,11 @@ exports.gameHistory_detail = async function (req, res, next) {
 exports.gameHistory_create_post = async function (req, res, next) {
     const params = {
         TableName: table,
+        Key: {
+            "id": uuidv4()
+        },
         Item: {
-            "id": uuidv4(),
-            "gameNumber": req.body.gameNumber,
+            // "gameNumber": req.body.gameNumber,
             "game": req.body.game,
             "numberOfItems": parseInt(req.body.numberOfItems),
             "numberOfSeconds": parseInt(req.body.numberOfSeconds),
@@ -119,7 +121,12 @@ exports.gameHistory_create_post = async function (req, res, next) {
                 "username": req.body.user.username,
                 "email": req.body.user.email
             }
-        }
+        },
+        UpdateExpression: "set gameNumber = gameNumber + :num",
+        ExpressionAttributeValues: {
+            ":num": 1
+        },
+        ReturnValues : "NONE"
     };
 
     console.log("Adding a new item...");
