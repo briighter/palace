@@ -111,22 +111,40 @@ exports.gameHistory_create_post = async function (req, res, next) {
         Key: {
             "id": uuidv4()
         },
-        Item: {
-            // "gameNumber": req.body.gameNumber,
-            "game": req.body.game,
-            "numberOfItems": parseInt(req.body.numberOfItems),
-            "numberOfSeconds": parseInt(req.body.numberOfSeconds),
-            "gameResult": req.body.gameResult,
-            "user": {
-                "username": req.body.user.username,
-                "email": req.body.user.email
-            }
+        // Item: {
+        //     // "gameNumber": req.body.gameNumber,
+        //     "game": req.body.game,
+        //     "numberOfItems": parseInt(req.body.numberOfItems),
+        //     "numberOfSeconds": parseInt(req.body.numberOfSeconds),
+        //     "gameResult": req.body.gameResult,
+        //     "user": {
+        //         "username": req.body.user.username,
+        //         "email": req.body.user.email
+        //     }
+        // },
+        UpdateExpression: 
+        "set \
+            gameNumber = gameNumber + :num,\
+            game = :game,\
+            numberOfItems = :noi,\
+            numberOfSeconds = :nos,\
+            gameResult = :result,\
+            #U.email = :email,\
+            #U.username = :username\
+        ",
+        ExpressionAttributeNames: {
+            "#U": "user"
         },
-        UpdateExpression: "set gameNumber = gameNumber + :num",
         ExpressionAttributeValues: {
-            ":num": 1
-        },
-        ReturnValues : "NONE"
+            ":num": 1,
+            // "gameNumber": req.body.gameNumber,
+            ":game": req.body.game,
+            ":noi": parseInt(req.body.numberOfItems),
+            ":nos": parseInt(req.body.numberOfSeconds),
+            ":result": req.body.gameResult,
+            ":username": req.body.user.username,
+            ":email": req.body.user.email
+        }
     };
 
     console.log("Adding a new item...");
