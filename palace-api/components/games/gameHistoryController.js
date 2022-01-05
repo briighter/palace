@@ -137,8 +137,7 @@ exports.gameHistory_create_post = async function (req, res, next) {
         },
         ExpressionAttributeValues: {
             ":num": 1,
-            // "gameNumber": req.body.gameNumber,
-            ":game": req.body.game,
+            ":game": 0,
             ":noi": parseInt(req.body.numberOfItems),
             ":nos": parseInt(req.body.numberOfSeconds),
             ":result": req.body.gameResult,
