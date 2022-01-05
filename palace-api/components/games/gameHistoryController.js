@@ -124,7 +124,7 @@ exports.gameHistory_create_post = async function (req, res, next) {
         // },
         UpdateExpression: 
         "set \
-            gameNumber = gameNumber + :num,\
+            gameNumber = :num,\
             game = :game,\
             numberOfItems = :noi,\
             numberOfSeconds = :nos,\
