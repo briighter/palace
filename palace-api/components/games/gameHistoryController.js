@@ -122,9 +122,9 @@ exports.gameHistory_create_post = async function (req, res, next) {
         //         "email": req.body.user.email
         //     }
         // },
-        UpdateExpression: 
+        UpdateExpression:
         "set \
-            gameNumber = :num,\
+            gameNumber = :gnum + :num,\
             game = :game,\
             numberOfItems = :noi,\
             numberOfSeconds = :nos,\
@@ -137,7 +137,8 @@ exports.gameHistory_create_post = async function (req, res, next) {
         },
         ExpressionAttributeValues: {
             ":num": 1,
-            ":game": 0,
+            ":gnum": 0,
+            ":game": req.body.game,
             ":noi": parseInt(req.body.numberOfItems),
             ":nos": parseInt(req.body.numberOfSeconds),
             ":result": req.body.gameResult,
