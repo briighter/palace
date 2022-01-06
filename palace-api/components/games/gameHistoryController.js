@@ -123,15 +123,15 @@ exports.gameHistory_create_post = async function (req, res, next) {
         //     }
         // },
         UpdateExpression:
-        "set \
-            gameNumber = :gnum + :num,\
-            game = :game,\
-            numberOfItems = :noi,\
-            numberOfSeconds = :nos,\
-            gameResult = :result,\
-            #U.email = :email,\
-            #U.username = :username\
-        ",
+        `set 
+            gameNumber = :gnum + :num,
+            game = :game,
+            numberOfItems = :noi,
+            numberOfSeconds = :nos,
+            gameResult = :result,
+            #U.email = :email,
+            #U.username = :username
+        `,
         ExpressionAttributeNames: {
             "#U": "user"
         },
