@@ -105,50 +105,55 @@ exports.gameHistory_detail = async function (req, res, next) {
 };
 
 // Handle Game History create on POST.
+//https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_PutItem.html#API_PutItem_RequestSyntax
 exports.gameHistory_create_post = async function (req, res, next) {
     const params = {
         TableName: table,
-        Key: {
-            "id": uuidv4()
-        },
-        // Item: {
-        //     // "gameNumber": req.body.gameNumber,
-        //     "game": req.body.game,
-        //     "numberOfItems": parseInt(req.body.numberOfItems),
-        //     "numberOfSeconds": parseInt(req.body.numberOfSeconds),
-        //     "gameResult": req.body.gameResult,
-        //     "user": {
-        //         "username": req.body.user.username,
-        //         "email": req.body.user.email
-        //     }
+        // Key: {
+        //     "id": uuidv4()
         // },
-        UpdateExpression:
-        `set 
-            gameNumber = :gnum + :num,
-            game = :game,
-            numberOfItems = :noi,
-            numberOfSeconds = :nos,
-            gameResult = :result,
-            #U.email = :email,
-            #U.username = :username
-        `,
-        ExpressionAttributeNames: {
-            "#U": "user"
+        Item: {
+            "id": uuidv4(),
+            // "gameNumber": req.body.gameNumber,
+            "game": req.body.game,
+            "numberOfItems": parseInt(req.body.numberOfItems),
+            "numberOfSeconds": parseInt(req.body.numberOfSeconds),
+            "gameResult": req.body.gameResult,
+            "user": {
+                "username": req.body.user.username,
+                "email": req.body.user.email
+            }
         },
+        // UpdateExpression:
+        // `set 
+        //     gameNumber = :gnum + :num,
+        //     game = :game,
+        //     numberOfItems = :noi,
+        //     numberOfSeconds = :nos,
+        //     gameResult = :result,
+        //     #U.email = :email,
+        //     #U.username = :username
+        // `
+        // `set gameNumber = gameNumber + :num`
+        // ,
+        // ExpressionAttributeNames: {
+        //     "#U": "user"
+        // },
+        ConditionExpression: `set gameNumber = gameNumber + :num`,
         ExpressionAttributeValues: {
             ":num": 1,
-            ":gnum": 0,
-            ":game": req.body.game,
-            ":noi": parseInt(req.body.numberOfItems),
-            ":nos": parseInt(req.body.numberOfSeconds),
-            ":result": req.body.gameResult,
-            ":username": req.body.user.username,
-            ":email": req.body.user.email
+            // ":gnum": 0,
+            // ":game": req.body.game,
+            // ":noi": parseInt(req.body.numberOfItems),
+            // ":nos": parseInt(req.body.numberOfSeconds),
+            // ":result": req.body.gameResult,
+            // ":username": req.body.user.username,
+            // ":email": req.body.user.email
         }
     };
 
     console.log("Adding a new item...");
-    await docClient.update(params, function (err, data) {
+    await docClient.put(params, function (err, data) {
         if (err) {
             console.error("Unable to add item. Error JSON:", JSON.stringify(err, null, 2));
         } else {
