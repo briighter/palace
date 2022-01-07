@@ -107,12 +107,14 @@ exports.gameHistory_detail = async function (req, res, next) {
 // Handle Game History create on POST.
 //https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_PutItem.html#API_PutItem_RequestSyntax
 exports.gameHistory_create_post = async function (req, res, next) {
+    // ADD ITEM
+    // UPDATE GAME NUMBER
     const params = {
         TableName: table,
         // Key: {
         //     "id": uuidv4()
         // },
-        Item: {
+        Key: {
             "id": uuidv4(),
             // "gameNumber": req.body.gameNumber,
             "game": req.body.game,
@@ -153,7 +155,7 @@ exports.gameHistory_create_post = async function (req, res, next) {
     };
 
     console.log("Adding a new item...");
-    await docClient.put(params, function (err, data) {
+    await docClient.update(params, function (err, data) {
         if (err) {
             console.error("Unable to add item. Error JSON:", JSON.stringify(err, null, 2));
         } else {
