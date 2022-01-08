@@ -113,7 +113,7 @@ exports.gameHistory_create_post = async function (req, res, next) {
         TableName: table,
         Item: {
             "id": key,
-            // "gameNumber": 0,
+            "gameNumber": 0,
             "game": req.body.game,
             "numberOfItems": parseInt(req.body.numberOfItems),
             "numberOfSeconds": parseInt(req.body.numberOfSeconds),
@@ -136,7 +136,7 @@ exports.gameHistory_create_post = async function (req, res, next) {
     const params2 = {
         TableName: table,
         Key: {
-            "id": uuidv4()
+            "id": key
         },
         UpdateExpression: `set gameNumber = gameNumber + :num`,
         ExpressionAttributeValues: {
