@@ -128,10 +128,8 @@ exports.gameHistory_create_post = async function (req, res, next) {
             // print all the movies
             console.log("Scan succeeded.");
             console.log(data.Count);
-            this.gnum = data.Count
+            gnum = data.Count
         }
-
-
     });
 
     // ADD ITEM
@@ -139,7 +137,7 @@ exports.gameHistory_create_post = async function (req, res, next) {
         TableName: table,
         Item: {
             "id": key,
-            "gameNumber": 0,
+            "gameNumber": gnum,
             "game": req.body.game,
             "numberOfItems": parseInt(req.body.numberOfItems),
             "numberOfSeconds": parseInt(req.body.numberOfSeconds),
