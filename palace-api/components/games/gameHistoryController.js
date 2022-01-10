@@ -108,6 +108,32 @@ exports.gameHistory_detail = async function (req, res, next) {
 //https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_PutItem.html#API_PutItem_RequestSyntax
 exports.gameHistory_create_post = async function (req, res, next) {
     const key = uuidv4();
+    let gnum;
+    // GET NUM ITEMS IN TABLE
+    const params0 = {
+        TableName: table,
+        FilterExpression: "#U.email = :useremail",
+        ExpressionAttributeNames: {
+            "#U": "user"
+        },
+        ExpressionAttributeValues: {
+            ":useremail": req.body.user.email,
+        }
+    };
+
+    await docClient.scan(params, function onScan(err, data) {
+        if (err) {
+            console.error("Unable to scan the table. Error JSON:", JSON.stringify(err, null, 2));
+        } else {
+            // print all the movies
+            console.log("Scan succeeded.");
+            console.log(data.Count);
+            this.gnum = data.Count
+        }
+
+
+    });
+
     // ADD ITEM
     const params1 = {
         TableName: table,
@@ -125,7 +151,7 @@ exports.gameHistory_create_post = async function (req, res, next) {
         }
     }
     console.log("Adding a new item...");
-    await docClient.update(params1, function (err, data) {
+    await docClient.put(params1, function (err, data) {
         if (err) {
             console.error("Unable to add item. Error JSON:", JSON.stringify(err, null, 2));
         } else {
