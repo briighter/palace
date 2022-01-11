@@ -4,6 +4,8 @@ const { v4: uuidv4 } = require('uuid');
 
 var docClient = new AWS.DynamoDB.DocumentClient();
 const table = 'GameHistory';
+const key = uuidv4();
+var gnum;
 
 exports.index = async function (req, res, next) {
     res.render('index', { title: 'Express' });
@@ -15,11 +17,11 @@ exports.gameHistory_list = async function (req, res, next) {
         TableName: table
     };
 
-    await docClient.scan(params, function onScan(err, data) {
+    docClient.scan(params, function onScan(err, data) {
         if (err) {
             console.error("Unable to scan the table. Error JSON:", JSON.stringify(err, null, 2));
         } else {
-            var result = []
+            var result = [];
             // print all the games
             console.log("Scan succeeded.");
             data.Items.forEach(function (gameData) {
@@ -51,14 +53,15 @@ exports.gameHistory_user_list = async function (req, res, next) {
         },
         ExpressionAttributeValues: {
             ":useremail": req.query.email,
-        }
+        },
+        ScanIndexForward: true
     };
 
-    await docClient.scan(params, function onScan(err, data) {
+    docClient.scan(params, function onScan(err, data) {
         if (err) {
             console.error("Unable to scan the table. Error JSON:", JSON.stringify(err, null, 2));
         } else {
-            var result = []
+            var result = [];
             // print all the games
             console.log("Scan succeeded.");
             data.Items.forEach(function (gameData) {
@@ -94,7 +97,7 @@ exports.gameHistory_detail = async function (req, res, next) {
     //     console.error("Unable to read item. Error JSON:", JSON.stringify(error, null, 2));
     // });
 
-    await docClient.get(params, function (err, data) {
+    docClient.get(params, function (err, data) {
         if (err) {
             console.error("Unable to read item. Error JSON:", JSON.stringify(err, null, 2));
         } else {
@@ -107,8 +110,6 @@ exports.gameHistory_detail = async function (req, res, next) {
 // Handle Game History create on POST.
 //https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_PutItem.html#API_PutItem_RequestSyntax
 exports.gameHistory_create_post = async function (req, res, next) {
-    const key = uuidv4();
-    let gnum;
 
     // GET NUM ITEMS IN TABLE
     const params0 = {
@@ -128,56 +129,51 @@ exports.gameHistory_create_post = async function (req, res, next) {
         } else {
             // print all the movies
             console.log("Scan succeeded.");
-            console.log(data.Count);
-            this.gnum = data.Count
-        }
-    });
-    console.log(gnum);
-    // ADD ITEM
-    const params1 = {
-        TableName: table,
-        Item: {
-            "id": key,
-            "gameNumber": this.gnum,
-            "game": req.body.game,
-            "numberOfItems": parseInt(req.body.numberOfItems),
-            "numberOfSeconds": parseInt(req.body.numberOfSeconds),
-            "gameResult": req.body.gameResult,
-            "user": {
-                "username": req.body.user.username,
-                "email": req.body.user.email
+            gnum = data.Count;
+
+            // ADD ITEM
+            const params1 = {
+                TableName: table,
+                Item: {
+                    "id": key,
+                    "gameNumber": gnum,
+                    "game": req.body.game,
+                    "numberOfItems": parseInt(req.body.numberOfItems),
+                    "numberOfSeconds": parseInt(req.body.numberOfSeconds),
+                    "gameResult": req.body.gameResult,
+                    "user": {
+                        "username": req.body.user.username,
+                        "email": req.body.user.email
+                    }
+                }
             }
-        }
-    }
-    console.log("Adding a new item...");
-    console.log(params1);
+            docClient.put(params1, function (err, data) {
+                if (err) {
+                    console.error("Unable to add item. Error JSON:", JSON.stringify(err, null, 2));
+                } else {
+                    console.log("Added item:", JSON.stringify(params1.Item, null, 2));
+                    // UPDATE GAME NUMBER
+                    const params2 = {
+                        TableName: table,
+                        Key: {
+                            "id": key
+                        },
+                        UpdateExpression: `set gameNumber = gameNumber + :num`,
+                        ExpressionAttributeValues: {
+                            ":num": 1
+                        }
+                    };
 
-    docClient.put(params1, function (err, data) {
-        if (err) {
-            console.error("Unable to add item. Error JSON:", JSON.stringify(err, null, 2));
-        } else {
-            console.log("Added item:", JSON.stringify(params1.Item, null, 2));
-        }
-    });
-
-    // UPDATE GAME NUMBER
-    const params2 = {
-        TableName: table,
-        Key: {
-            "id": key
-        },
-        UpdateExpression: `set gameNumber = gameNumber + :num`,
-        ExpressionAttributeValues: {
-            ":num": 1
-        }
-    };
-
-    console.log("Updating item values...");
-    docClient.update(params2, function (err, data) {
-        if (err) {
-            console.error("Unable to update item. Error JSON:", JSON.stringify(err, null, 2));
-        } else {
-            console.log("Updated item:", JSON.stringify(params2.Item, null, 2));
+                    console.log("Updating item values...");
+                    docClient.update(params2, function (err, data) {
+                        if (err) {
+                            console.error("Unable to update item. Error JSON:", JSON.stringify(err, null, 2));
+                        } else {
+                            console.log("Updated item...");
+                        }
+                    });
+                }
+            });
         }
     });
 };
