@@ -109,6 +109,7 @@ exports.gameHistory_detail = async function (req, res, next) {
 exports.gameHistory_create_post = async function (req, res, next) {
     const key = uuidv4();
     let gnum;
+
     // GET NUM ITEMS IN TABLE
     const params0 = {
         TableName: table,
@@ -121,23 +122,23 @@ exports.gameHistory_create_post = async function (req, res, next) {
         }
     };
 
-    await docClient.scan(params, function onScan(err, data) {
+    docClient.scan(params0, function onScan(err, data) {
         if (err) {
             console.error("Unable to scan the table. Error JSON:", JSON.stringify(err, null, 2));
         } else {
             // print all the movies
             console.log("Scan succeeded.");
             console.log(data.Count);
-            gnum = data.Count
+            this.gnum = data.Count
         }
     });
-
+    console.log(gnum);
     // ADD ITEM
     const params1 = {
         TableName: table,
         Item: {
             "id": key,
-            "gameNumber": gnum,
+            "gameNumber": this.gnum,
             "game": req.body.game,
             "numberOfItems": parseInt(req.body.numberOfItems),
             "numberOfSeconds": parseInt(req.body.numberOfSeconds),
@@ -149,13 +150,16 @@ exports.gameHistory_create_post = async function (req, res, next) {
         }
     }
     console.log("Adding a new item...");
-    await docClient.put(params1, function (err, data) {
+    console.log(params1);
+
+    docClient.put(params1, function (err, data) {
         if (err) {
             console.error("Unable to add item. Error JSON:", JSON.stringify(err, null, 2));
         } else {
-            console.log("Added item:", JSON.stringify(params.Item, null, 2));
+            console.log("Added item:", JSON.stringify(params1.Item, null, 2));
         }
     });
+
     // UPDATE GAME NUMBER
     const params2 = {
         TableName: table,
@@ -169,11 +173,11 @@ exports.gameHistory_create_post = async function (req, res, next) {
     };
 
     console.log("Updating item values...");
-    await docClient.update(params2, function (err, data) {
+    docClient.update(params2, function (err, data) {
         if (err) {
-            console.error("Unable to add item. Error JSON:", JSON.stringify(err, null, 2));
+            console.error("Unable to update item. Error JSON:", JSON.stringify(err, null, 2));
         } else {
-            console.log("Updated item:", JSON.stringify(params.Item, null, 2));
+            console.log("Updated item:", JSON.stringify(params2.Item, null, 2));
         }
     });
 };
