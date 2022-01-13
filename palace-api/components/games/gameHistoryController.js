@@ -4,7 +4,6 @@ const { v4: uuidv4 } = require('uuid');
 
 var docClient = new AWS.DynamoDB.DocumentClient();
 const table = 'GameHistory';
-const key = uuidv4();
 var gnum;
 
 exports.index = async function (req, res, next) {
@@ -176,10 +175,12 @@ exports.gameHistory_create_post = async function (req, res, next) {
     //         });
     //     }
     // });
-    runScan(req);
+    var key = uuidv4();
+
+    runScan(req, key);
 };
 
-function runScan(req) {
+function runScan(req, uuid) {
     // GET NUM ITEMS IN TABLE
     const params0 = {
         TableName: table,
@@ -199,18 +200,18 @@ function runScan(req) {
             // print all the movies
             console.log("Scan succeeded.");
             gnum = data.Count;
-            runAddItem(req,gnum);
+            runAddItem(uuid, req, gnum);
         }
     });
 
 };
 
-function runAddItem(req, gnum) {
+function runAddItem(uuid, req, gnum) {
     // ADD ITEM
     const params1 = {
         TableName: table,
         Item: {
-            "id": key,
+            "id": uuid,
             "gameNumber": gnum,
             "game": req.body.game,
             "numberOfItems": parseInt(req.body.numberOfItems),
@@ -227,17 +228,17 @@ function runAddItem(req, gnum) {
             console.error("Unable to add item. Error JSON:", JSON.stringify(err, null, 2));
         } else {
             console.log("Added item:", JSON.stringify(params1.Item, null, 2));
-            runUpdateGameNumber();
+            runUpdateGameNumber(uuid);
         }
     });
 }
 
-function runUpdateGameNumber() {
+function runUpdateGameNumber(uuid) {
     // UPDATE GAME NUMBER
     const params2 = {
         TableName: table,
         Key: {
-            "id": key
+            "id": uuid
         },
         UpdateExpression: `set gameNumber = gameNumber + :num`,
         ExpressionAttributeValues: {
