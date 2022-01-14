@@ -7,14 +7,14 @@ import { AuthService } from '@auth0/auth0-angular';
   styleUrls: ['./profile-header.component.scss'],
 })
 export class ProfileHeaderComponent implements OnInit {
-  isLoggedIn: boolean = false;
+  isLoggedIn = false;
 
   constructor(public auth: AuthService) { }
 
   ngOnInit(): void {
 
     this.auth.isAuthenticated$.subscribe((data => {
-      if (data === true) this.isLoggedIn = true;
+      if (data === true) {this.isLoggedIn = true;}
       // data ? true : this.isLoggedIn = true;
     }));
   }

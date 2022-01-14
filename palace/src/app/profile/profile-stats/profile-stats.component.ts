@@ -13,14 +13,21 @@ import { GameHistory } from 'src/app/shared/models/game-history';
 export class ProfileStatsComponent implements OnInit {
   gameStats: GameHistory[];
   userEmail: string;
+  isLoggedIn: boolean;
 
   constructor(public auth: AuthService, private gameService: GameServiceService) { }
 
   ngOnInit() {
-    this.auth.user$.subscribe(data => {
-      this.userEmail = data.email;
+    if(this.isLoggedIn === false) {
+      this.userEmail = '';
       this.showGameData(this.userEmail);
-    });
+
+    } else {
+      this.auth.user$.subscribe(data => {
+        this.userEmail = data.email;
+        this.showGameData(this.userEmail);
+      });
+    }
   }
 
   showGameData(userInfo: string) {
