@@ -21,7 +21,6 @@ export class ProfileStatsComponent implements OnInit {
     if(this.isLoggedIn === false) {
       this.userEmail = '';
       this.showGameData(this.userEmail);
-
     } else {
       this.auth.user$.subscribe(data => {
         this.userEmail = data.email;
