@@ -11,14 +11,14 @@ import { GameHistory } from 'src/app/shared/models/game-history';
   styleUrls: ['./profile-stats.component.scss'],
 })
 export class ProfileStatsComponent implements OnInit {
+  @Input() isAuthenticated: any;
   gameStats: GameHistory[];
   userEmail: string;
-  isLoggedIn: boolean;
 
   constructor(public auth: AuthService, private gameService: GameServiceService) { }
 
   ngOnInit() {
-    if(this.isLoggedIn === false) {
+    if(this.isAuthenticated === false) {
       this.userEmail = '';
       this.showGameData(this.userEmail);
     } else {
@@ -31,6 +31,6 @@ export class ProfileStatsComponent implements OnInit {
 
   showGameData(userInfo: string) {
     this.gameService.getAllGameHistoryForUser(userInfo)
-      .subscribe(data => this.gameStats = data);
+      .subscribe(data => this.gameStats = data,() => {}, () => console.log(this.gameStats));
   }
 }

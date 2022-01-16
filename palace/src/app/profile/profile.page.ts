@@ -11,7 +11,6 @@ export class ProfilePage implements OnInit {
   constructor(public auth: AuthService) {}
 
   ngOnInit(): void {
-    console.log('proflie page');
     this.auth.isAuthenticated$.subscribe(data => {
       this.isAuthenticated = data;
     });
