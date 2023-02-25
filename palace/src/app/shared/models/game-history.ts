@@ -1,6 +1,11 @@
-export class GameHistory {
+import { User } from './user';
+
+export interface GameHistory {
+    gameId?: number;
+    gameNumber?: number;
     game: string;
     numberOfItems: number;
-    numberofSeconds: number;
-    result: string;
+    numberOfSeconds: number;
+    gameResult: string;
+    user?: User;
 }

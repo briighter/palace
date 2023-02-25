@@ -1,6 +1,6 @@
 <ion-content [fullscreen]="true">
   <ion-icon name="arrow-back-outline" class="back-arrow" routerLink=""></ion-icon>
   <ion-title>profile</ion-title>
-  <app-profile-header></app-profile-header>
-  <app-profile-stats></app-profile-stats>
+  <app-profile-header [isAuthenticated]="isAuthenticated"></app-profile-header>
+  <app-profile-stats [isAuthenticated]="isAuthenticated"></app-profile-stats>
 </ion-content>

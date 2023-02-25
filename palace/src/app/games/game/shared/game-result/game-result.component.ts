@@ -11,7 +11,7 @@ export class GameResultComponent implements OnInit {
   @Output() beginPlayEvent = new EventEmitter<boolean>();
   @Output() changeSettingsEvent = new EventEmitter<boolean>();
 
-  @Input() gameResult: boolean;
+  @Input() gameResult: string;
   @Input() game;
 
   constructor(private router: Router, private route: ActivatedRoute) { }

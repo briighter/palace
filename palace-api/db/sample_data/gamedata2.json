@@ -1,0 +1,62 @@
+[
+	{
+		"id": "0520da9b-d865-415e-bfe0-933884048470",
+		"gameNumber": 6,
+		"game": "numbers",
+		"numberOfItems": 4,
+		"numberOfSeconds": 1,
+		"gameResult": "w",
+		"user": {
+			"username": "palaceuser123",
+			"email": "jaylima0@gmail.com"
+		}
+	},
+	{
+		"id": "57c9a6bc-0975-4d8c-a08b-6f82199f98f2",
+		"gameNumber": 7,
+		"game": "numbers",
+		"numberOfItems": 10,
+		"numberOfSeconds": 10,
+		"gameResult": "w",
+		"user": {
+			"username": "palaceuser123",
+			"email": "jaylima0@gmail.com"
+		}
+	},
+	{
+		"id": "1bb123ab-0912-4aad-b049-39904768c7e8",
+		"gameNumber": 8,
+		"game": "numbers",
+		"numberOfItems": 14,
+		"numberOfSeconds": 10,
+		"gameResult": "l",
+		"user": {
+			"username": "palaceuser123",
+			"email": "jaylima0@gmail.com"
+		}
+	},
+	{
+		"id": "3d9dfde4-76d7-483a-95b0-4a1237b4f66c",
+		"gameNumber": 9,
+		"game": "letters",
+		"numberOfItems": 5,
+		"numberOfSeconds": 5,
+		"gameResult": "w",
+		"user": {
+			"username": "palaceuser123",
+			"email": "jaylima0@gmail.com"
+		}
+	},
+	{
+		"id": "7d1c8106-05d3-411f-88de-88a6cafa6b04",
+		"gameNumber": 10,
+		"game": "letters",
+		"numberOfItems": 8,
+		"numberOfSeconds": 4,
+		"gameResult": "l",
+		"user": {
+			"username": "palaceuser123",
+			"email": "jaylima0@gmail.com"
+		}
+	}
+]

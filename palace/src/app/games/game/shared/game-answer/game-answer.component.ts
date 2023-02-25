@@ -18,4 +18,5 @@ export class GameAnswerComponent implements OnInit {
   submit() {
     this.submitAnswerEvent.emit(this.userAnswer.value);
   }
+
 }

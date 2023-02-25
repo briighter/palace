@@ -1,19 +1,25 @@
 <ion-grid>
   <ion-row>
     <ion-col>
+      <div>Game #</div>
+    </ion-col>
+    <ion-col>
       <div>Game</div>
     </ion-col>
     <ion-col>
-      <div>#</div>
+      <div># of Items</div>
     </ion-col>
     <ion-col>
       <div>Time</div>
     </ion-col>
     <ion-col>
-      <div>W or L</div>
+      <div>W/L</div>
     </ion-col>
   </ion-row>
   <ion-row *ngFor="let game of gameStats">
+    <ion-col>
+      <div>{{ game.gameNumber }}</div>
+    </ion-col>
     <ion-col>
       <div>{{ game.game }}</div>
     </ion-col>
@@ -21,10 +27,10 @@
       <div>{{ game.numberOfItems }}</div>
     </ion-col>
     <ion-col>
-      <div>{{ game.numberofSeconds }}</div>
+      <div>{{ game.numberOfSeconds }}</div>
     </ion-col>
     <ion-col>
-      <div>{{ game.result }}</div>
+      <div>{{ game.gameResult }}</div>
     </ion-col>
   </ion-row>
 </ion-grid>

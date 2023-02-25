@@ -1,6 +1,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { GameHistory } from 'src/app/shared/models/game-history';
+import { GameServiceService } from '../shared/services/game-service.service';
 import { GameSettingsService } from '../shared/services/game-settings.service';
+import { AuthService } from '@auth0/auth0-angular';
 
 interface Settings {
   length: number;
@@ -25,8 +28,7 @@ export class NumbersComponent implements OnInit, OnDestroy {
   resultIsDisplayed = false;
   settingsIsDisplayed = false;
 
-  answers = []; // Refactor to database
-  gameResult: boolean;
+  gameResult: string;
 
   // Initialize settings
   settings: Settings = {
@@ -39,7 +41,15 @@ export class NumbersComponent implements OnInit, OnDestroy {
 
   settingsSubscription: Subscription;
 
-  constructor(private settingService: GameSettingsService) {
+  gameHistory: GameHistory;
+  timeSeconds: number;
+  userInfo: any;
+
+  constructor(
+    private settingService: GameSettingsService,
+    private gameService: GameServiceService,
+    public auth: AuthService
+  ) {
     this.settingsSubscription = settingService.settings$.subscribe(
       settings => {
         this.settings = settings;
@@ -48,7 +58,11 @@ export class NumbersComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-
+    this.auth.user$.subscribe(data => {
+      this.userInfo = data;
+    });
+    this.convertTimeToMili(this.settings.timeMinutes, this.settings.timeSeconds);
+    this.convertTimeToSeconds(this.settings.timeMinutes, this.settings.timeSeconds);
   }
 
   ionViewDidLeave() {
@@ -75,14 +89,14 @@ export class NumbersComponent implements OnInit, OnDestroy {
 
   generateNumbers(size: number) {
     let num;
-    for(let i = 1; i <= size; i++) {
+    for (let i = 1; i <= size; i++) {
       num = Math.floor(Math.random() * (this.max - this.min) + this.min);
       this.numbers = this.numbers.concat(num);
     }
   }
 
   hideNumbers() {
-    setTimeout(function() {
+    setTimeout(function () {
       this.subjectIsDisplayed = false;
     }.bind(this), this.timeMilli);
 
@@ -97,24 +111,25 @@ export class NumbersComponent implements OnInit, OnDestroy {
 
   checkUserAnswer(ans: string) {
     if (this.numbers === ans) {
-      return true;
+      return 'w';
     }
-    return false;
+    return 'l';
   }
 
   submitUserAnswer(ans: string) {
-    this.answers.push(ans);
     this.gameResult = this.checkUserAnswer(ans);
+    this.submitGameData();
     this.inputIsDisplayed = false;
     this.resultIsDisplayed = true;
   }
 
-  toggleSettings(isDisplayed: boolean){
+  toggleSettings(isDisplayed: boolean) {
     this.settingsIsDisplayed = isDisplayed;
   }
 
   updateSettings() {
     this.convertTimeToMili(this.settings.timeMinutes, this.settings.timeSeconds);
+    this.convertTimeToSeconds(this.settings.timeMinutes, this.settings.timeSeconds);
     this.toggleSettings(true);
   }
 
@@ -125,5 +140,28 @@ export class NumbersComponent implements OnInit, OnDestroy {
     const timeMilliseconds = minToMilli + secToMilli;
 
     this.timeMilli = timeMilliseconds;
+  }
+
+  convertTimeToSeconds(minutes: number, seconds: number) {
+    this.timeSeconds = (minutes * 60) + seconds;
+  }
+
+  submitGameData() {
+    this.gameHistory = {
+      game: this.game,
+      // Include game mode as `gameMode` for progressive or static modes
+      numberOfItems: this.settings.length,
+      numberOfSeconds: this.timeSeconds,
+      gameResult: this.gameResult.toString(),
+      user: (this.userInfo ? {email: this.userInfo.email, username: this.userInfo.nickname} : {email: '', username: ''})
+      // ...(this.userInfo ? { user: { email: this.userInfo.email, username: this.userInfo.nickname } }
+      //   : { user: { email: undefined, username: undefined } }) // ...(someCondition ? {b: 5}:else)
+    };
+    if (this.userInfo) {
+      this.gameHistory.user.username = this.userInfo.nickname;
+    }
+    console.log('Built game data...');
+    console.log(this.gameHistory);
+    this.gameService.postGameHistory(this.gameHistory);
   }
 }

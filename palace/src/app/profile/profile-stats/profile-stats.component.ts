@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { AuthService } from '@auth0/auth0-angular';
+
+import { GameServiceService } from 'src/app/games/game/shared/services/game-service.service';
 import { GameHistory } from 'src/app/shared/models/game-history';
 
 
@@ -8,41 +11,26 @@ import { GameHistory } from 'src/app/shared/models/game-history';
   styleUrls: ['./profile-stats.component.scss'],
 })
 export class ProfileStatsComponent implements OnInit {
-  gameStats: GameHistory[] = [
-    {
-      game: 'numbers',
-      numberOfItems: 4,
-      numberofSeconds: 20,
-      result: 'w'
-    },
-    {
-      game: 'numbers',
-      numberOfItems: 5,
-      numberofSeconds: 10,
-      result: 'w'
-    },
-    {
-      game: 'numbers',
-      numberOfItems: 6,
-      numberofSeconds: 10,
-      result: 'w'
-    },
-    {
-      game: 'numbers',
-      numberOfItems: 10,
-      numberofSeconds: 10,
-      result: 'l'
-    },
-    {
-      game: 'letters',
-      numberOfItems: 5,
-      numberofSeconds: 10,
-      result: 'w'
-    },
-  ];
+  @Input() isAuthenticated: any;
+  gameStats: GameHistory[];
+  userEmail: string;
 
-  constructor() { }
+  constructor(public auth: AuthService, private gameService: GameServiceService) { }
 
-  ngOnInit() { }
+  ngOnInit() {
+    if(this.isAuthenticated === false) {
+      this.userEmail = '';
+      this.showGameData(this.userEmail);
+    } else {
+      this.auth.user$.subscribe(data => {
+        this.userEmail = data.email;
+        this.showGameData(this.userEmail);
+      });
+    }
+  }
 
+  showGameData(userInfo: string) {
+    this.gameService.getAllGameHistoryForUser(userInfo)
+      .subscribe(data => this.gameStats = data,() => {}, () => console.log(this.gameStats));
+  }
 }
